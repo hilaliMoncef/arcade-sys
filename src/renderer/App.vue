@@ -2,11 +2,11 @@
   <div id="app">
     <Navbar />
     <div class="container">
-      <div id="notification" class="alert alert-warning mx-auto">
+      <div id="notification" class="alert alert-warning mx-auto d-none">
         <div class="d-flex align-items-center justify-content-between">
           <span id="message">Une nouvelle version est disponible !</span>
           <button
-            class="btn btn-primary"
+            class="btn btn-primary d-none"
             id="restart-app"
             @click.prevent="restartApp"
           >
@@ -79,14 +79,14 @@ export default {
     ipcRenderer.on("update_available", () => {
       ipcRenderer.removeAllListeners("update_available");
       message.innerText = "A new update is available. Downloading now...";
-      notification.classList.remove("hidden");
+      notification.classList.remove("d-none");
     });
     ipcRenderer.on("update_downloaded", () => {
       ipcRenderer.removeAllListeners("update_downloaded");
       message.innerText =
         "Update Downloaded. It will be installed on restart. Restart now?";
-      restartButton.classList.remove("hidden");
-      notification.classList.remove("hidden");
+      restartButton.classList.remove("d-none");
+      notification.classList.remove("d-none");
     });
   },
   methods: {
