@@ -50,6 +50,8 @@ SHASUMS256.txt
 compile_commands.json
 .envrc
 
+electron-builder.yml
+
 # npm package
 /npm/dist
 /npm/path.txt
