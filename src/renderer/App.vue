@@ -15,8 +15,8 @@
       <router-view />
     </div>
     <vue-progress-bar />
-    <div class="container text-center">
-      <p id="version"></p>
+    <div class="container text-center" style="position: absolute; bottom: 0px;">
+      <p class="small">Version 1.0.2</p>
     </div>
   </div>
 </template>
