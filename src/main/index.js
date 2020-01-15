@@ -1,12 +1,7 @@
 "use strict";
 
-import { app, BrowserWindow } from "electron";
+import { app, BrowserWindow, ipcMain } from "electron";
 import { autoUpdater } from "electron-updater";
-const log = require("electron-log");
-
-autoUpdater.logger = log;
-autoUpdater.logger.transports.file.level = "info";
-log.info("App starting...");
 
 /**
  * Set `__static` path to static files in production
@@ -65,10 +60,17 @@ app.on("activate", () => {
  * https://simulatedgreg.gitbooks.io/electron-vue/content/en/using-electron-builder.html#auto-updating
  */
 
-autoUpdater.on("update-downloaded", () => {
-  autoUpdater.quitAndInstall();
+ipcMain.on("app_version", event => {
+  event.sender.send("app_version", { version: app.getVersion() });
 });
 
-app.on("ready", function() {
-  autoUpdater.checkForUpdatesAndNotify();
+autoUpdater.on("update-available", () => {
+  mainWindow.webContents.send("update_available");
+});
+autoUpdater.on("update-downloaded", () => {
+  mainWindow.webContents.send("update_downloaded");
+});
+
+ipcMain.on("restart_app", () => {
+  autoUpdater.quitAndInstall();
 });
