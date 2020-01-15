@@ -1,0 +1,4 @@
+appId: com.puls.FrontAutoUpdate
+publish:
+  provider: github
+  token: [f80a22eed07fa6c4de88dc8ad9d41b9f55393a17]
