@@ -32,7 +32,10 @@ function createWindow() {
     useContentSize: true,
     width: 1000,
     frame: false,
-    fullscreen: true
+    fullscreen: true,
+    webPreferences: {
+      nodeIntegration: true
+    }
   });
 
   mainWindow.loadURL(winURL);
