@@ -1,9 +1,9 @@
 {
   "name": "puls-front",
-  "version": "1.1.6",
+  "version": "1.1.7",
   "author": "Moncef HILALI",
-  "description": "The connected frontend for your arcade terminal.",
-  "license": "MIT",
+  "description": "A complete system to manage Arcade terminal capable of running retro games with donations management.",
+  "license": "GNU AGPLv3",
   "main": "./dist/electron/main.js",
   "repository": {
     "type": "git",
