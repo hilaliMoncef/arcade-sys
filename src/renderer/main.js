@@ -73,30 +73,12 @@ Vue.prototype.$http.interceptors.request.use(
 Vue.prototype.$http.interceptors.response.use(
   response => {
     Vue.prototype.$Progress.finish();
-    if (response.status && response.status == 201) {
-      toast.success(response.statusText);
-    }
-    if (response.status == 200 && response.config.method == "post") {
-      toast.success(response.statusText);
-    }
     return response;
   },
   error => {
     // Error handling part
     Vue.prototype.$Progress.fail();
-    if (error.response && error.response.data) {
-      if (error.response.data.non_field_errors) {
-        toast.error(
-          error.response.statusText +
-            " - " +
-            error.response.data.non_field_errors
-        );
-      } else {
-        toast.error(error.response.statusText + " - " + error.response.data);
-      }
-    } else {
-      toast.error(error);
-    }
+    return error;
   }
 );
 

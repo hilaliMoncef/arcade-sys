@@ -1,8 +1,7 @@
 <template>
   <div id="app">
-    <Navbar />
     <div class="container">
-      <div id="notification" class="alert alert-warning mx-auto d-none">
+      <div id="notification" class="alert alert-warning mx-auto d-none my-3">
         <div class="d-flex align-items-center justify-content-between">
           <span id="message">Une nouvelle version est disponible !</span>
           <button
@@ -19,7 +18,9 @@
         </div>
       </div>
     </div>
-    <div class="container">
+    <div
+      class="container w-100 h-100 d-flex justify-content-center align-items-center"
+    >
       <router-view />
     </div>
     <vue-progress-bar />
@@ -30,15 +31,10 @@
 </template>
 
 <script>
-import Navbar from "@/components/Navbar.vue";
-
 const { ipcRenderer } = require("electron");
 
 export default {
   name: "App",
-  components: {
-    Navbar
-  },
   data: function() {
     return {
       gamepads: []
@@ -170,5 +166,11 @@ export default {
   border-radius: 20px !important;
   border: none !important;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.06), 0 3px 6px rgba(0, 0, 0, 0.13);
+}
+
+html,
+body,
+#app {
+  height: 100%;
 }
 </style>

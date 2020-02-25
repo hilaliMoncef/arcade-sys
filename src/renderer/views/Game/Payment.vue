@@ -5,9 +5,10 @@
         <img
           src="@/assets/img/contactless.png"
           width="150"
+          height="100"
           class="mx-auto"
           alt="Contact Less"
-        >
+        />
       </div>
     </div>
     <div class="pricing-header row py-3 mx-auto text-center">
@@ -28,10 +29,7 @@
             ]"
             @click="chooseAmount(index)"
           >
-            <input
-              type="radio"
-              :value="amount"
-            >
+            <input type="radio" :value="amount" />
             <span
               :class="[
                 'selected',
@@ -51,16 +49,13 @@
 
     <div class="row mt-3 text-center">
       <div class="col text-center">
-        <a
-          href=""
-          class="btn text-danger btn-link mr-2"
-        >Appuyer sur <span class="g-btn border-danger">B</span> pour
-          revenir</a>
-        <a
-          href=""
-          class="btn btn-primary"
-          @click.prevent="pay"
-        >Appuyer sur <span class="g-btn">A</span> pour continuer</a>
+        <a href="" class="btn text-danger btn-link mr-2"
+          >Appuyer sur <span class="g-btn border-danger">B</span> pour
+          revenir</a
+        >
+        <a href="" class="btn btn-primary" @click.prevent="pay"
+          >Appuyer sur <span class="g-btn">A</span> pour continuer</a
+        >
       </div>
     </div>
   </div>
@@ -68,84 +63,108 @@
 
 <script>
 export default {
-  name: 'Payment',
-  data: function () {
+  name: "Payment",
+  data: function() {
     return {
-      choosenIndexOf: 0,
-      amounts: [1, 5, 10, 15, 20, 30],
-      payment: ''
-    }
+      choosenIndexOf: 1,
+      amounts: [0, 1, 5, 10, 20, 30],
+      ipPayter: "192.168.1.34:3184",
+      payment: ""
+    };
   },
   computed: {
-    a () {
-      return this.$store.state.gamepad.A
+    a() {
+      return this.$store.state.gamepad.A;
     },
-    b () {
-      return this.$store.state.gamepad.B
+    b() {
+      return this.$store.state.gamepad.B;
     },
-    left () {
-      return this.$store.state.gamepad.Left
+    left() {
+      return this.$store.state.gamepad.Left;
     },
-    right () {
-      return this.$store.state.gamepad.Right
+    right() {
+      return this.$store.state.gamepad.Right;
     }
   },
   watch: {
-    a: function (val) {
+    a: function(val) {
       if (val) {
-        this.pay()
+        this.pay();
       }
     },
-    b: function (val) {
+    b: function(val) {
       if (val) {
-        this.$router.go(-1)
+        this.$router.go(-1);
       }
     },
-    left: function (val) {
+    left: function(val) {
       if (val) {
         if (this.amounts[this.choosenIndexOf - 1]) {
-          this.chooseAmount(this.choosenIndexOf - 1)
+          this.chooseAmount(this.choosenIndexOf - 1);
         }
       }
     },
-    right: function (val) {
+    right: function(val) {
       if (val) {
         if (this.amounts[this.choosenIndexOf + 1]) {
-          this.chooseAmount(this.choosenIndexOf + 1)
+          this.chooseAmount(this.choosenIndexOf + 1);
         }
       }
     }
   },
   methods: {
-    chooseAmount: function (index) {
-      this.choosenIndexOf = index
+    chooseAmount: function(index) {
+      this.choosenIndexOf = index;
     },
-    pay: function () {
+    launchPayment: function(file, amount) {
+      const os = require("os");
+      console.log(os.networkInterfaces());
+      var exec = require("child_process").execFile;
+      let urlArg = "--url=192.168.1.34:3184";
+      let amountArg = "--amount=" + amount * 100;
+      return new Promise((resolve, reject) => {
+        exec(file, [urlArg, amountArg], (error, stdout, stderr) => {
+          if (error) {
+            console.warn(error);
+          }
+          resolve(stdout ? stdout : stderr);
+        });
+      });
+    },
+    pay: function() {
       if (this.choosenIndexOf != null) {
-        // ADD PAYMENT API HERE
-        this.payment = {
-          donator: this.$store.state.session.donator,
-          terminal: this.$store.state.session.terminal,
-          campaign: this.$store.state.session.campaign,
-          game: this.$store.state.session.game,
-          date: new Date(),
-          method: 'Contactless',
-          status: 'Accepted',
-          amount: this.amounts[this.choosenIndexOf],
-          currency: 'EUR'
-        }
-        this.$http
-          .post('payment/', this.payment)
-          .then(resp => {
-            if (resp.status == '201') {
-              this.$router.push('/watch')
-            }
-          })
-          .catch(err => {
-            console.log(err.response)
-          })
+        // Calling PayterPay from here
+        this.launchPayment(
+          "PayterPay.exe",
+          this.amounts[this.choosenIndexOf]
+        ).then(resp => {
+          console.log(resp);
+        });
+
+        // Proceeding
+        // this.payment = {
+        //   donator: this.$store.state.session.donator,
+        //   terminal: this.$store.state.session.terminal,
+        //   campaign: this.$store.state.session.campaign,
+        //   game: this.$store.state.session.game,
+        //   date: new Date(),
+        //   method: "Contactless",
+        //   status: "Accepted",
+        //   amount: this.amounts[this.choosenIndexOf],
+        //   currency: "EUR"
+        // };
+        // this.$http
+        //   .post("payment/", this.payment)
+        //   .then(resp => {
+        //     if (resp.status == "201") {
+        //       this.$router.push("/watch");
+        //     }
+        //   })
+        //   .catch(err => {
+        //     console.log(err.response);
+        //   });
       }
     }
   }
-}
+};
 </script>

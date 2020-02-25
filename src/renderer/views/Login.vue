@@ -2,7 +2,7 @@
   <div>
     <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
       <h1 class="display-4">
-        Connexion
+        Connexion en cours
       </h1>
       <p class="lead">
         Connectez votre terminal pour le mettre en service.
@@ -13,43 +13,11 @@
       {{ error }}
     </div>
 
-    <form class="col-6 offset-3">
-      <div class="row">
-        <div class="col">
-          <label for="firstName">Username</label>
-          <input
-            v-model="credentials.username"
-            type="text"
-            class="form-control"
-            required
-          />
-          <div class="invalid-feedback">
-            Valid first name is required.
-          </div>
-        </div>
+    <div class="d-flex justify-content-center">
+      <div class="spinner-border text-success" role="status">
+        <span class="sr-only">Loading...</span>
       </div>
-      <div class="row mt-2">
-        <div class="col">
-          <label for="firstName">Password</label>
-          <input
-            v-model="credentials.password"
-            type="password"
-            class="form-control"
-            required
-          />
-          <div class="invalid-feedback">
-            Password is invalid.
-          </div>
-        </div>
-      </div>
-      <div class="row my-3">
-        <div class="col text-center">
-          <button class="btn btn-primary btn-lg" @click.prevent="login">
-            Se connecter
-          </button>
-        </div>
-      </div>
-    </form>
+    </div>
   </div>
 </template>
 
@@ -59,12 +27,19 @@ export default {
   data: function() {
     return {
       credentials: {
-        username: "",
-        password: ""
+        username: process.env.PULS_LOGIN,
+        password: process.env.PULS_MDP
       },
       loading: false,
       error: ""
     };
+  },
+  mounted: function() {
+    if (this.$store.getters.isLoggedIn) {
+      this.$router.push("/start");
+    } else {
+      this.login();
+    }
   },
   methods: {
     login: function() {
