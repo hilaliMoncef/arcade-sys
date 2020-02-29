@@ -5,7 +5,7 @@ import store from "./store";
 import axios from "axios";
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import toast from "@/assets/js/toast.js";
+import "./assets/css/theme.css";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import {
   faUserSecret,

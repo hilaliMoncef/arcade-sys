@@ -18,15 +18,10 @@
         </div>
       </div>
     </div>
-    <div
-      class="container w-100 h-100 d-flex justify-content-center align-items-center"
-    >
+    <div class="w-100 h-100 d-flex justify-content-center align-items-center">
       <router-view />
     </div>
     <vue-progress-bar />
-    <div class="container text-center" style="position: absolute; bottom: 0px;">
-      <p id="version" class="small text-light"></p>
-    </div>
   </div>
 </template>
 
@@ -65,7 +60,7 @@ export default {
     ipcRenderer.send("app_version");
     ipcRenderer.on("app_version", (event, arg) => {
       ipcRenderer.removeAllListeners("app_version");
-      version.innerText = "Version " + arg.version;
+      //version.innerText = "Version " + arg.version;
     });
 
     const notification = document.getElementById("notification");

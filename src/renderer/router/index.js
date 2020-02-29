@@ -27,14 +27,15 @@ import Payment from "../views/Game/Payment.vue";
 import Play from "../views/Game/Play.vue";
 import Endgame from "../views/Game/Endgame.vue";
 import EmailSent from "../views/Game/EmailSent.vue";
+import Test from "../views/Test.vue";
 
 Vue.use(VueRouter);
 
 const routes = [
   {
-    path: "/",
-    name: "home",
-    component: Login
+    path: "/test",
+    name: "test",
+    component: Test
   },
   {
     path: "/login",
@@ -45,7 +46,7 @@ const routes = [
     }
   },
   {
-    path: "/start",
+    path: "/",
     name: "start",
     component: StartTerminal,
     meta: {

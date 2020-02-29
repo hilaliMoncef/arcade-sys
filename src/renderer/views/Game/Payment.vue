@@ -11,6 +11,14 @@
         />
       </div>
     </div>
+    <div class="card" v-if="error.active">
+      <div class="card-body">
+        <h5 class="card-title">{{ error.title }}</h5>
+        <p class="card-text">
+          {{ error.msg }}
+        </p>
+      </div>
+    </div>
     <div class="pricing-header row py-3 mx-auto text-center">
       <ul class="p-0 m-0 w-100 col-12">
         <div
@@ -68,8 +76,14 @@ export default {
     return {
       choosenIndexOf: 1,
       amounts: [0, 1, 5, 10, 20, 30],
-      ipPayter: "192.168.1.34:3184",
-      payment: ""
+      ipPayter: "192.168.1.44:3183",
+      isLoading: false,
+      loadingFullPage: true,
+      error: {
+        active: false,
+        title: "",
+        msg: ""
+      }
     };
   },
   computed: {
@@ -116,53 +130,109 @@ export default {
     chooseAmount: function(index) {
       this.choosenIndexOf = index;
     },
-    launchPayment: function(file, amount) {
-      const os = require("os");
-      console.log(os.networkInterfaces());
-      var exec = require("child_process").execFile;
-      let urlArg = "--url=192.168.1.34:3184";
-      let amountArg = "--amount=" + amount * 100;
-      return new Promise((resolve, reject) => {
-        exec(file, [urlArg, amountArg], (error, stdout, stderr) => {
-          if (error) {
-            console.warn(error);
-          }
-          resolve(stdout ? stdout : stderr);
-        });
+    launchPayment: function(amount) {
+      var edge = require("electron-edge-js");
+      var pay = edge.func({
+        source: "edje-script.csx",
+        references: ["PayterPay.dll"]
       });
+
+      var payload = {
+        amount: amount,
+        timeout: 15 // Default timeout
+      };
+
+      var result = pay(payload, true);
+      return result;
     },
     pay: function() {
       if (this.choosenIndexOf != null) {
         // Calling PayterPay from here
-        this.launchPayment(
-          "PayterPay.exe",
-          this.amounts[this.choosenIndexOf]
-        ).then(resp => {
-          console.log(resp);
-        });
+        var result = this.launchPayment(this.amounts[this.choosenIndexOf]);
 
-        // Proceeding
-        // this.payment = {
-        //   donator: this.$store.state.session.donator,
-        //   terminal: this.$store.state.session.terminal,
-        //   campaign: this.$store.state.session.campaign,
-        //   game: this.$store.state.session.game,
-        //   date: new Date(),
-        //   method: "Contactless",
-        //   status: "Accepted",
-        //   amount: this.amounts[this.choosenIndexOf],
-        //   currency: "EUR"
-        // };
-        // this.$http
-        //   .post("payment/", this.payment)
-        //   .then(resp => {
-        //     if (resp.status == "201") {
-        //       this.$router.push("/watch");
-        //     }
-        //   })
-        //   .catch(err => {
-        //     console.log(err.response);
-        //   });
+        this.payment = {
+          donator: this.$store.state.session.donator,
+          terminal: this.$store.state.session.terminal,
+          campaign: this.$store.state.session.campaign,
+          game: this.$store.state.session.game,
+          date: new Date(),
+          method: "Contactless",
+          status: "",
+          amount: this.amounts[this.choosenIndexOf],
+          currency: "EUR"
+        };
+
+        // Checking response
+        switch (result) {
+          case 0:
+            // APPROVED
+            this.payment.status = "Accepted";
+            this.$http
+              .post("payment/", this.payment)
+              .then(resp => {
+                if (resp.status == "201") {
+                  this.$router.push("/watch");
+                }
+              })
+              .catch(err => {
+                console.log(err.response);
+              });
+            break;
+          case 1:
+            // DECLINED
+            this.payment.status = "Declined";
+            this.$http
+              .post("payment/", this.payment)
+              .then(resp => {
+                // Show declined message
+                this.error = {
+                  active: true,
+                  title: "Paiement décliné",
+                  msg:
+                    "Votre paiement a été refusé. Veuillez contacter votre émetteur de carte."
+                };
+              })
+              .catch(err => {
+                console.log(err.response);
+              });
+            break;
+          case -1:
+            // CONNECTION ERROR
+            this.error = {
+              active: true,
+              title: "Erreur de connexion au terminal",
+              msg:
+                "Il y a un problème de connexion au terminal de paiement. Veuillez réessayer ou contacter le support."
+            };
+            break;
+          case -5:
+            // TIMEOUT
+            this.error = {
+              active: true,
+              title: "Temps écoulé",
+              msg:
+                "Vous avez mis trop de temps à passer votre carte. L'opération est annulée, veuillez réessayer."
+            };
+            break;
+          case -6:
+            // INVALID CARD
+            this.error = {
+              active: true,
+              title: "Carte invalide",
+              msg:
+                "Votre carte est invalide. Veuillez réessayer ou contacter le support."
+            };
+            break;
+          default:
+            // UNKNOWN ERROR
+            this.error = {
+              active: true,
+              title: "Erreur inconnue",
+              msg:
+                "Un problème inconnu est survenu. Veuillez réessayer ou contacter le support."
+            };
+            break;
+        }
       }
     }
   }
