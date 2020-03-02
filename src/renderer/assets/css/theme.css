@@ -19,6 +19,14 @@ body {
   font-weight: normal;
 }
 
+.h1,
+.h2,
+.h3,
+.h4,
+.h5 {
+  font-weight: bold;
+}
+
 .splited-view {
   height: 100%;
 }
@@ -32,6 +40,30 @@ body {
   opacity: 0.3;
 }
 
+.with-split {
+  content: " ";
+  display: block;
+  position: absolute;
+  background: rgb(53, 168, 224);
+  background: linear-gradient(
+    90deg,
+    rgba(53, 168, 224, 1) 0%,
+    rgba(148, 27, 128, 1) 100%
+  );
+  top: 0px;
+  right: 0;
+  height: 100px;
+  width: 100%;
+}
+
+.with-split:after {
+  content: "";
+  display: block;
+  border-style: solid;
+  border-width: 100px 0 0 100vw;
+  border-color: transparent transparent transparent #fff;
+}
+
 .small-gamepad {
   position: absolute;
   bottom: 0;
@@ -40,7 +72,28 @@ body {
   font-size: 14px;
 }
 
-.small-gamepad .g-btn {
+.big-gamepad {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 14px;
+}
+
+.small-btn-gamepad {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 14px;
+  background-color: #fac812;
+}
+
+.small-gamepad .g-btn,
+.big-gamepad .g-btn,
+.small-btn-gamepad .g-btn {
   color: white;
   border-width: 2px;
   font-weight: bold;
@@ -153,4 +206,42 @@ body {
   border-color: #fac812;
   background-color: #fac812;
   color: #000;
+}
+
+.amount {
+  box-sizing: content-box;
+  background-color: #3fa9f5;
+  border-radius: 20px;
+}
+
+.amount.selected {
+  border: 3px solid #fac812 !important;
+}
+
+.logo-circle {
+  overflow: hidden;
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  background-color: white;
+}
+
+.logo-circle img {
+  object-fit: contain;
+  width: 100px;
+  height: 100px;
+}
+
+.logo-rounded {
+  overflow: hidden;
+  border-radius: 10px;
+  width: 130px;
+  height: 130px;
+  background-color: white;
+}
+
+.logo-rounded img {
+  object-fit: cover;
+  width: 130px;
+  height: 130px;
 }

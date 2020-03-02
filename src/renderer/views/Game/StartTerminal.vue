@@ -47,7 +47,7 @@
               </div>
               <div class="cards d-flex align-items-stretch mx-5">
                 <div
-                  v-for="(game, index) in games"
+                  v-for="game in games"
                   class="form-group col-4 mt-2"
                   :key="game.id"
                   :for="game.id"
@@ -103,7 +103,7 @@
               </div>
               <div class="cards d-flex align-items-stretch mx-5 mt-5">
                 <div
-                  v-for="(campaign, index) in campaigns"
+                  v-for="campaign in campaigns"
                   :key="campaign.id"
                   :for="campaign.id"
                   class="form-group col-4 mt-2"

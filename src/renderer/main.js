@@ -20,6 +20,9 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import VueProgressBar from "vue-progressbar";
+import VueYoutube from "vue-youtube";
+
+Vue.use(VueYoutube);
 
 // Loading bar stuff
 Vue.use(VueProgressBar, {

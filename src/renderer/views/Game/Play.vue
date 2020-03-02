@@ -21,7 +21,8 @@ export default {
   name: "Play",
   data: function() {
     return {
-      currentGame: this.$store.state.currentGame
+      currentGame: this.$store.state.currentGame,
+      shell: {}
     };
   },
   computed: {
@@ -41,22 +42,28 @@ export default {
     this.$store.commit("startGameSession");
     this.$store.commit("stopListening");
     let command = "retroarch -L " + this.currentGame.path;
-    this.startShell(command).then(resp => {
-      this.$store.commit("startListening");
-      this.endGame();
-    });
+    this.startShell(command);
+    // .then(resp => {
+    //   this.$store.commit("startListening");
+    //   this.endGame();
+    // });
   },
   methods: {
     startShell: function(command) {
       var exec = require("child_process").exec;
-      return new Promise((resolve, reject) => {
-        exec(command, (error, stdout, stderr) => {
-          if (error) {
-            console.warn(error);
-          }
-          resolve(stdout ? stdout : stderr);
-        });
+      var shell = exec(command, (error, stdout, stderr) => {
+        if (error) {
+          console.warn(error);
+        }
+        console.log(stdout);
+        this.$store.commit("startListening");
+        this.endGame();
       });
+      var timer = setTimeout(function() {
+        // To be tested on Linux
+        console.log("after 7 seconds ?");
+        exec("kill " + shell.pid);
+      }, 7000);
     },
     endGame: function() {
       this.$router.push("/endgame");

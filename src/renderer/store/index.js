@@ -36,6 +36,8 @@ export default new Vuex.Store({
       listening: true,
       A: false,
       B: false,
+      X: false,
+      Y: false,
       Right: false,
       Left: false,
       Top: false,
@@ -55,6 +57,12 @@ export default new Vuex.Store({
     },
     toggleB(state, value) {
       state.gamepad.B = value;
+    },
+    toggleX(state, value) {
+      state.gamepad.X = value;
+    },
+    toggleY(state, value) {
+      state.gamepad.Y = value;
     },
     toggleRight(state, value) {
       state.gamepad.Right = value;

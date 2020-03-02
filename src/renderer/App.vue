@@ -122,6 +122,16 @@ export default {
         } else {
           this.$store.commit("toggleB", false);
         }
+        if (this.buttonPressed(gp.buttons[2])) {
+          this.$store.commit("toggleX", true);
+        } else {
+          this.$store.commit("toggleX", false);
+        }
+        if (this.buttonPressed(gp.buttons[3])) {
+          this.$store.commit("toggleY", true);
+        } else {
+          this.$store.commit("toggleY", false);
+        }
         if (this.buttonPressed(gp.buttons[9])) {
           this.$store.commit("toggleStart", true);
         } else {

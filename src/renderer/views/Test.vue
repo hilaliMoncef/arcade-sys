@@ -1,206 +1,89 @@
 <template>
   <div class="h-100 w-100">
-    <div class="splited-view d-flex flex-column">
-      <div class="view position-relative first bg-gradient d-flex">
-        <!-- RIBBON -->
-        <div class="ribbon left">
-          <span class="h5 mr-4 mb-3">1 - Choisis ton jeu</span>
-        </div>
-        <div class="small-gamepad bg-gradient d-flex flex-column px-4 py-2">
+    <div class="h-100 w-100">
+      <div class="d-flex flex-column h-100 bg-gradient">
+        <div
+          class="view position-relative d-flex flex-column align-items-center"
+        >
+          <div class="ribbon left">
+            <span class="h3 mr-3 mb-4">Merci !</span>
+          </div>
+
           <div
-            class="d-flex align-items-center justify-content-between flex-1 py-2 px-3 mb-3"
+            class="row d-flex align-items-center justify-content-around mt-5 pt-5 w-100"
+          >
+            <span
+              class="col-4 offset-1 h3 mt-3 text-uppercase text-center d-flex flex-column align-items-center"
+            >
+            </span>
+            <div class="col-2 offset-5">
+              <div class="logo-circle">
+                <img src="@/assets/img/msf.png" />
+              </div>
+            </div>
+          </div>
+          <div class="container mt-5">
+            <div class="col-8 offset-2">
+              <div class="row">
+                <label class="h5 text-white" for="email">Mail</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  aria-describedby="emailHelpId"
+                  placeholder="Entrez un email valide"
+                />
+              </div>
+              <div class="row mt-5">
+                <div class="form-check">
+                  <label
+                    class="form-check-label text-uppercase font-weight-bold "
+                  >
+                    <input type="checkbox" class="form-check-input" value="1" />
+                    Newsletter association
+                  </label>
+                </div>
+                <div class="form-check">
+                  <label
+                    class="form-check-label text-uppercase font-weight-bold mt-3"
+                  >
+                    <input type="checkbox" class="form-check-input" value="1" />
+                    être recontacté par l’association
+                  </label>
+                </div>
+              </div>
+              <div class="row mt-4">
+                <SimpleKeyboard />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="big-gamepad bg-gradient d-flex px-4 py-2">
+          <div
+            class="d-flex align-items-center justify-content-between flex-1 py-2 px-3"
           >
             <img src="@/assets/img/gamepad.svg" width="60" />
-            <div class="g-buttons">
+            <div class="g-buttons ml-4">
               <div class="row mb-1">
                 <span class="g-btn">X</span>
                 <span class="g-btn">Y</span>
                 <span class="g-btn">L</span>
               </div>
               <div class="row">
-                <span class="g-btn">A</span>
-                <span class="g-btn">B</span>
+                <span :class="['g-btn', a ? 'clicked' : '']">A</span>
+                <span :class="['g-btn', b ? 'clicked' : '']">B</span>
                 <span class="g-btn">R</span>
               </div>
             </div>
           </div>
-          <div class="d-flex align-items-center justify-content-between">
+          <div class="d-flex align-items-center justify-content-between ml-5">
             <span><span class="g-btn">A</span>Valider</span>
-            <span><span class="g-btn">B</span>Retour</span>
+            <span><span class="g-btn">B</span>Accueil</span>
           </div>
         </div>
-        <div class="d-flex w-100 align-items-center overlayed">
-          <!-- Main layout -->
-          <div class="col-3 font-weight-bold text-white">
-            1 PARTIE = 5 MIN
-          </div>
-          <div class="cards d-flex mx-5">
-            <div class="form-group col-4 mt-2">
-              <label :class="['checkbox', 'py-3', 'mx-2', 'px-3']">
-                <input type="radio" />
-                <div class="px-5">
-                  <img
-                    src="@/assets/img/msf.png"
-                    alt=""
-                    class="img-fluid rounded-circle"
-                  />
-                </div>
-                <span class="mt-2 font-weight-bold text-uppercase"
-                  >Campagne</span
-                >
-                <p class="small text-left" style="line-height: 1.3em;">
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut
-                  fuga harum accusamus quod quae quasi, voluptas, voluptates
-                  animi exercitationem modi excepturi a beatae debitis pariatur
-                  ullam hic.
-                </p>
-              </label>
-            </div>
-            <div class="form-group col-4 mt-2">
-              <label :class="['selected', 'checkbox', 'py-3', 'mx-2', 'px-3']">
-                <input type="radio" />
-                <div class="px-5">
-                  <img
-                    src="@/assets/img/msf.png"
-                    alt=""
-                    class="img-fluid rounded-circle"
-                  />
-                </div>
-                <span class="mt-2 font-weight-bold text-uppercase"
-                  >Campagne</span
-                >
-                <p class="small text-left" style="line-height: 1.3em;">
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut
-                  fuga harum accusamus quod quae quasi, voluptas, voluptates
-                  animi exercitationem modi excepturi a beatae debitis pariatur
-                  ullam hic.
-                </p>
-              </label>
-            </div>
-            <div class="form-group col-4 mt-2">
-              <label :class="['checkbox', 'py-3', 'mx-2', 'px-3']">
-                <input type="radio" />
-                <div class="px-5">
-                  <img
-                    src="@/assets/img/msf.png"
-                    alt=""
-                    class="img-fluid rounded-circle"
-                  />
-                </div>
-                <span class="mt-2 font-weight-bold text-uppercase"
-                  >Campagne</span
-                >
-                <p class="small text-left" style="line-height: 1.3em;">
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut
-                  fuga harum accusamus quod quae quasi, voluptas, voluptates
-                  animi exercitationem modi excepturi a beatae debitis pariatur
-                  ullam hic.
-                </p>
-              </label>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="view second position-relative d-flex">
-        <div class="ribbon right">
-          <span class="h5">2 - Choisis ton association</span>
-        </div>
-        <div class="d-flex w-100 mt-5 align-items-center">
-          <div
-            class="col-3 h4 font-weight-bold text-black d-flex justify-content-center text-center"
-          >
-            1 PARTIE<br />=<br />1 DON
-          </div>
-          <div class="cards d-flex mx-5">
-            <div class="form-group col-4 mt-2">
-              <label
-                :class="[
-                  'checkbox',
-                  'bg-gradient-diag',
-                  'py-3',
-                  'mx-2',
-                  'px-3'
-                ]"
-              >
-                <input type="radio" />
-                <div class="px-5">
-                  <img
-                    src="@/assets/img/msf.png"
-                    alt=""
-                    class="img-fluid rounded-circle"
-                  />
-                </div>
-                <span class="mt-2 font-weight-bold text-uppercase"
-                  >Campagne</span
-                >
-                <p class="small text-left" style="line-height: 1.3em;">
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut
-                  fuga harum accusamus quod quae quasi, voluptas, voluptates
-                  animi exercitationem modi excepturi a beatae debitis pariatur
-                  ullam hic.
-                </p>
-              </label>
-            </div>
-            <div class="form-group col-4 mt-2">
-              <label
-                :class="[
-                  'selected',
-                  'bg-gradient-diag',
-                  'checkbox',
-                  'py-3',
-                  'mx-2',
-                  'px-3'
-                ]"
-              >
-                <input type="radio" />
-                <div class="px-5">
-                  <img
-                    src="@/assets/img/msf.png"
-                    alt=""
-                    class="img-fluid rounded-circle"
-                  />
-                </div>
-                <span class="mt-2 font-weight-bold text-uppercase"
-                  >Campagne</span
-                >
-                <p class="small text-left" style="line-height: 1.3em;">
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut
-                  fuga harum accusamus quod quae quasi, voluptas, voluptates
-                  animi exercitationem modi excepturi a beatae debitis pariatur
-                  ullam hic.
-                </p>
-              </label>
-            </div>
-            <div class="form-group col-4 mt-2">
-              <label
-                :class="[
-                  'checkbox',
-                  'py-3',
-                  'bg-gradient-diag',
-                  'mx-2',
-                  'px-3'
-                ]"
-              >
-                <input type="radio" />
-                <div class="px-5">
-                  <img
-                    src="@/assets/img/msf.png"
-                    alt=""
-                    class="img-fluid rounded-circle"
-                  />
-                </div>
-                <span class="mt-2 font-weight-bold text-uppercase"
-                  >Campagne</span
-                >
-                <p class="small text-left" style="line-height: 1.3em;">
-                  Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ut
-                  fuga harum accusamus quod quae quasi, voluptas, voluptates
-                  animi exercitationem modi excepturi a beatae debitis pariatur
-                  ullam hic.
-                </p>
-              </label>
-            </div>
-          </div>
+        <div
+          class="small-btn-gamepad d-flex align-items-center justify-content-center p-4 mb-3 pr-5"
+        >
+          <span><span class="g-btn">L</span>Envoyer</span>
         </div>
       </div>
     </div>
@@ -208,13 +91,39 @@
 </template>
 
 <script>
+import SimpleKeyboard from "@/components/SimpleKeyboard.vue";
+
 export default {
   name: "Test",
+  components: {
+    SimpleKeyboard
+  },
   data: function() {
     return {
-      stdout: ""
+      timer: 0,
+      duration: 0,
+      videoId: "TM86NgP2zx8",
+      playerVars: {
+        autoplay: 1,
+        controls: 0,
+        modestbranding: 1,
+        showinfo: 0
+      }
     };
   },
-  methods: {}
+  mounted: function() {},
+  methods: {
+    playerPlaying: async function() {
+      var duration = await this.$refs.youtube.player.getDuration();
+      this.duration = duration;
+      var interval = setInterval(() => {
+        this.timer = this.timer + 1;
+      }, 1000);
+      if (this.timer >= this.duration) {
+        clearInterval(interval);
+        this.$router.push("/play");
+      }
+    }
+  }
 };
 </script>

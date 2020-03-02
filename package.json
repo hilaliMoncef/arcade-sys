@@ -67,6 +67,7 @@
     "vue-progressbar": "^0.7.5",
     "vue-router": "^3.0.1",
     "vue-simple-keyboard": "^2.0.1",
+    "vue-youtube": "^1.4.0",
     "vuex": "^3.0.1",
     "vuex-electron": "^1.0.0"
   },

@@ -20,7 +20,7 @@ import Home from "../views/Home.vue";
 import Login from "../views/Login.vue";
 
 import StartTerminal from "../views/Game/StartTerminal.vue";
-import GameChoice from "../views/Game/GameChoice.vue";
+import Contactless from "../views/Game/Contactless.vue";
 import ShowCampaign from "../views/Game/ShowCampaign.vue";
 import StopTerminal from "../views/Game/StopTerminal.vue";
 import Payment from "../views/Game/Payment.vue";
@@ -62,18 +62,19 @@ const routes = [
     }
   },
   {
-    path: "/choose",
-    name: "choose",
-    component: GameChoice,
+    path: "/payment",
+    name: "payment",
+    component: Payment,
     meta: {
       requiresAuth: true
     }
   },
   {
-    path: "/payment",
-    name: "payment",
-    component: Payment,
+    path: "/contactless/:amount",
+    name: "contactless",
+    component: Contactless,
     meta: {
+      onlyFrom: "payment",
       requiresAuth: true
     }
   },
@@ -83,7 +84,7 @@ const routes = [
     component: ShowCampaign,
     meta: {
       requiresAuth: true,
-      onlyFrom: "payment"
+      onlyFrom: "contactless"
     }
   },
   {

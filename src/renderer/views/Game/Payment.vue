@@ -1,69 +1,103 @@
 <template>
-  <div>
-    <div class="col-6 offset-3">
-      <div class="row text-center mb-3">
-        <img
-          src="@/assets/img/contactless.png"
-          width="150"
-          height="100"
-          class="mx-auto"
-          alt="Contact Less"
-        />
-      </div>
-    </div>
-    <div class="card" v-if="error.active">
-      <div class="card-body">
-        <h5 class="card-title">{{ error.title }}</h5>
-        <p class="card-text">
-          {{ error.msg }}
-        </p>
-      </div>
-    </div>
-    <div class="pricing-header row py-3 mx-auto text-center">
-      <ul class="p-0 m-0 w-100 col-12">
+  <div class="h-100 w-100">
+    <div class="h-100 w-100">
+      <div class="d-flex flex-column h-100">
         <div
-          class="form-group mt-3 d-flex flex-wrap justify-content-between align-items-stretch"
+          class="bg-gradient-half position-absolute w-100 h-100 d-flex flex-column"
         >
-          <label
-            v-for="(amount, index) in amounts"
-            :key="index"
-            :class="[
-              choosenIndexOf == index ? 'checked' : '',
-              'checkbox',
-              'col',
-              'pt-5',
-              'py-3',
-              'm-3'
-            ]"
-            @click="chooseAmount(index)"
-          >
-            <input type="radio" :value="amount" />
-            <span
-              :class="[
-                'selected',
-                'd-flex',
-                'align-items-center',
-                'justify-content-center'
-              ]"
-            >
-              <font-awesome-icon icon="check" />
-            </span>
-            <p class="small my-0">Don de</p>
-            <h4 class="display-4">{{ amount }}€</h4>
-          </label>
+          <div class="flex-1 h-100 bg-gradient position-relative"></div>
+          <div class="flex-1 h-100 bg-white position-relative">
+            <div class="with-split"></div>
+          </div>
         </div>
-      </ul>
-    </div>
-
-    <div class="row mt-3 text-center">
-      <div class="col text-center">
-        <a href="" class="btn text-danger btn-link mr-2"
-          >Appuyer sur <span class="g-btn border-danger">B</span> pour
-          revenir</a
+        <div
+          class="view position-relative d-flex flex-column align-items-center"
         >
-        <a href="" class="btn btn-primary" @click.prevent="pay"
-          >Appuyer sur <span class="g-btn">A</span> pour continuer</a
-        >
+          <div class="ribbon left" style="width: 380px; height: 110px;">
+            <span class="h5 mr-3 mb-4">3 - Prêt à être solidaire?</span>
+          </div>
+          <div
+            class="row d-flex align-items-center justify-content-around mt-5 pt-5 w-100"
+          >
+            <span class="col-8 offset-2 h3 text-uppercase text-center"
+              >100% est reversé à l'association</span
+            >
+            <div class="col-2">
+              <div class="logo-circle">
+                <img :src="campaign.logo" :alt="campaign.name" />
+              </div>
+            </div>
+          </div>
+          <div class="container-fluid px-5 my-3">
+            <div class="row d-flex align-items-start justify-content-between">
+              <div
+                v-for="(amount, index) in amounts"
+                :key="index"
+                :class="[
+                  'amount-wrap',
+                  'col',
+                  'd-flex',
+                  'flex-column',
+                  'align-items-center'
+                ]"
+              >
+                <div class="logo-rounded">
+                  <img
+                    :src="campaign.logo"
+                    :alt="campaign.name"
+                    height="125"
+                    class="rounded"
+                  />
+                </div>
+                <div
+                  :class="[
+                    choosenIndexOf == index ? 'selected' : '',
+                    'amount',
+                    'mt-3',
+                    'd-flex',
+                    'flex-column',
+                    'p-3'
+                  ]"
+                >
+                  <span class="h2 text-center mt-3">{{ amount }}€</span>
+                  <span class="mt-3"
+                    >Erum, to magni si as voluptis que doluptati int, tem que
+                    que volupti onsequatis dolupta speritat rae simus illestrum
+                    qui cquam libus, unt volore sequibusant.</span
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="big-gamepad bg-gradient d-flex px-4 py-2">
+            <div
+              class="d-flex align-items-center justify-content-between flex-1 py-2 px-3"
+            >
+              <img src="@/assets/img/gamepad.svg" width="60" />
+              <div class="g-buttons ml-4">
+                <div class="row mb-1">
+                  <span class="g-btn">X</span>
+                  <span class="g-btn">Y</span>
+                  <span class="g-btn">L</span>
+                </div>
+                <div class="row">
+                  <span :class="['g-btn', a ? 'clicked' : '']">A</span>
+                  <span :class="['g-btn', b ? 'clicked' : '']">B</span>
+                  <span class="g-btn">R</span>
+                </div>
+              </div>
+            </div>
+            <div class="d-flex align-items-center justify-content-between ml-5">
+              <span><span class="g-btn">A</span>Valider</span>
+              <span><span class="g-btn">B</span>Retour</span>
+            </div>
+          </div>
+          <div
+            class="small-btn-gamepad d-flex align-items-center justify-content-center p-4 mb-3 pr-5"
+          >
+            <span><span class="g-btn">A</span>Valider</span>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -74,9 +108,9 @@ export default {
   name: "Payment",
   data: function() {
     return {
-      choosenIndexOf: 1,
-      amounts: [0, 1, 5, 10, 20, 30],
-      ipPayter: "192.168.1.44:3183",
+      campaign: this.$store.state.currentCampaign,
+      choosenIndexOf: 2,
+      amounts: [1, 5, 10, 20, 30],
       isLoading: false,
       loadingFullPage: true,
       error: {
@@ -103,7 +137,7 @@ export default {
   watch: {
     a: function(val) {
       if (val) {
-        this.pay();
+        this.proceed();
       }
     },
     b: function(val) {
@@ -130,110 +164,11 @@ export default {
     chooseAmount: function(index) {
       this.choosenIndexOf = index;
     },
-    launchPayment: function(amount) {
-      var edge = require("electron-edge-js");
-      var pay = edge.func({
-        source: "edje-script.csx",
-        references: ["PayterPay.dll"]
+    proceed: function() {
+      this.$router.push({
+        name: "contactless",
+        params: { amount: this.amounts[this.choosenIndexOf] }
       });
-
-      var payload = {
-        amount: amount,
-        timeout: 15 // Default timeout
-      };
-
-      var result = pay(payload, true);
-      return result;
-    },
-    pay: function() {
-      if (this.choosenIndexOf != null) {
-        // Calling PayterPay from here
-        var result = this.launchPayment(this.amounts[this.choosenIndexOf]);
-
-        this.payment = {
-          donator: this.$store.state.session.donator,
-          terminal: this.$store.state.session.terminal,
-          campaign: this.$store.state.session.campaign,
-          game: this.$store.state.session.game,
-          date: new Date(),
-          method: "Contactless",
-          status: "",
-          amount: this.amounts[this.choosenIndexOf],
-          currency: "EUR"
-        };
-
-        // Checking response
-        switch (result) {
-          case 0:
-            // APPROVED
-            this.payment.status = "Accepted";
-            this.$http
-              .post("payment/", this.payment)
-              .then(resp => {
-                if (resp.status == "201") {
-                  this.$router.push("/watch");
-                }
-              })
-              .catch(err => {
-                console.log(err.response);
-              });
-            break;
-          case 1:
-            // DECLINED
-            this.payment.status = "Declined";
-            this.$http
-              .post("payment/", this.payment)
-              .then(resp => {
-                // Show declined message
-                this.error = {
-                  active: true,
-                  title: "Paiement décliné",
-                  msg:
-                    "Votre paiement a été refusé. Veuillez contacter votre émetteur de carte."
-                };
-              })
-              .catch(err => {
-                console.log(err.response);
-              });
-            break;
-          case -1:
-            // CONNECTION ERROR
-            this.error = {
-              active: true,
-              title: "Erreur de connexion au terminal",
-              msg:
-                "Il y a un problème de connexion au terminal de paiement. Veuillez réessayer ou contacter le support."
-            };
-            break;
-          case -5:
-            // TIMEOUT
-            this.error = {
-              active: true,
-              title: "Temps écoulé",
-              msg:
-                "Vous avez mis trop de temps à passer votre carte. L'opération est annulée, veuillez réessayer."
-            };
-            break;
-          case -6:
-            // INVALID CARD
-            this.error = {
-              active: true,
-              title: "Carte invalide",
-              msg:
-                "Votre carte est invalide. Veuillez réessayer ou contacter le support."
-            };
-            break;
-          default:
-            // UNKNOWN ERROR
-            this.error = {
-              active: true,
-              title: "Erreur inconnue",
-              msg:
-                "Un problème inconnu est survenu. Veuillez réessayer ou contacter le support."
-            };
-            break;
-        }
-      }
     }
   }
 };
