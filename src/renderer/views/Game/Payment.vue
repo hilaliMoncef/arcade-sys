@@ -43,7 +43,7 @@
               >
                 <div class="logo-rounded">
                   <img
-                    :src="campaign.logo"
+                    :src="getActionPhoto(campaign, amount)"
                     :alt="campaign.name"
                     height="125"
                     class="rounded"
@@ -60,11 +60,7 @@
                   ]"
                 >
                   <span class="h2 text-center mt-3">{{ amount }}€</span>
-                  <span class="mt-3"
-                    >Erum, to magni si as voluptis que doluptati int, tem que
-                    que volupti onsequatis dolupta speritat rae simus illestrum
-                    qui cquam libus, unt volore sequibusant.</span
-                  >
+                  <span class="mt-3">{{ getAction(campaign, amount) }}</span>
                 </div>
               </div>
             </div>
@@ -161,6 +157,40 @@ export default {
     }
   },
   methods: {
+    getAction: function(campaign, amount) {
+      if (amount == 1) {
+        return campaign.text1;
+      }
+      if (amount == 5) {
+        return campaign.text5;
+      }
+      if (amount == 10) {
+        return campaign.text10;
+      }
+      if (amount == 20) {
+        return campaign.text20;
+      }
+      if (amount == 30) {
+        return campaign.text30;
+      }
+    },
+    getActionPhoto: function(campaign, amount) {
+      if (amount == 1) {
+        return campaign.photo1;
+      }
+      if (amount == 5) {
+        return campaign.photo5;
+      }
+      if (amount == 10) {
+        return campaign.photo10;
+      }
+      if (amount == 20) {
+        return campaign.photo20;
+      }
+      if (amount == 30) {
+        return campaign.photo30;
+      }
+    },
     chooseAmount: function(index) {
       this.choosenIndexOf = index;
     },

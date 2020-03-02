@@ -38,15 +38,12 @@ const routes = [
     component: Test
   },
   {
-    path: "/login",
+    path: "/",
     name: "login",
-    component: Login,
-    meta: {
-      requiresAnon: true
-    }
+    component: Login
   },
   {
-    path: "/",
+    path: "/start",
     name: "start",
     component: StartTerminal,
     meta: {

@@ -35,6 +35,8 @@ export default {
     };
   },
   mounted: function() {
+    this.$store.dispatch("logout");
+    this.$router.push("/login");
     if (this.$store.getters.isLoggedIn) {
       this.$router.push("/start");
     } else {

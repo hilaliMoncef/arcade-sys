@@ -171,9 +171,9 @@ export default {
   },
   methods: {
     saveEmail: function() {
-      if (this.donator.email) {
+      if (this.donator.email != "") {
         this.$http.put("donator/" + this.donator.id + "/", this.donator);
-        this.$router.push("/start");
+        this.restart();
       }
     },
     restart: function() {
