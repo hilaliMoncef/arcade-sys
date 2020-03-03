@@ -33,12 +33,12 @@ Vue.use(VueRouter);
 
 const routes = [
   {
-    path: "/test",
+    path: "/",
     name: "test",
     component: Test
   },
   {
-    path: "/",
+    path: "/test",
     name: "login",
     component: Login
   },

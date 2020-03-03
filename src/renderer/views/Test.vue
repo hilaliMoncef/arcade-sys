@@ -1,48 +1,29 @@
 <template>
   <div class="h-100 w-100">
-    
+    <h1>Testing GPIO</h1>
   </div>
 </template>
 
 <script>
-import SimpleKeyboard from "@/components/SimpleKeyboard.vue";
-
 export default {
   name: "Test",
-  components: {
-    SimpleKeyboard
-  },
   data: function() {
     return {
-      timer: 0,
-      duration: 0,
-      videoId: "TM86NgP2zx8",
-      playerVars: {
-        autoplay: 1,
-        controls: 0,
-        modestbranding: 1,
-        showinfo: 0
-      }
+      timer: 0
     };
   },
   mounted: function() {
-    this.shell();
+    var gpio = require("onoff");
+
+    var pushButton = new gpio(35, "in", "both");
+
+    pushButton.watch(function(err, value) {
+      if (err) {
+        throw err;
+      }
+      console.log(value);
+    });
   },
-  methods: {
-    shell:  function() {
-      var exec = require("child_process").exec;
-      var shell = exec("retroarch", {
-          timeout: 7000
-        }, (error, stdout, stderr) => {
-        if (error) {
-          console.warn(error);
-        }
-        console.log(stdout);
-      });
-      var timer = setTimeout(function() {
-        exec('killall "retroarch"');
-      }, 7000);
-    }
-  }
+  methods: {}
 };
 </script>
