@@ -60,10 +60,8 @@ export default {
         this.endGame();
       });
       var timer = setTimeout(function() {
-        // To be tested on Linux
-        console.log("after 7 seconds ?");
-        exec("kill " + shell.pid);
-      }, 7000);
+        exec('killall "retroarch"');
+      }, 40000);
     },
     endGame: function() {
       this.$router.push("/endgame");

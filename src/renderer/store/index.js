@@ -214,9 +214,17 @@ export default new Vuex.Store({
     logout({ commit }) {
       return new Promise(resolve => {
         if (!this.getters.isAdmin) {
+<<<<<<< HEAD
           axios.get("terminal/mine/off/").then(resp => {
             resolve(resp);
           });
+=======
+          axios
+            .get("terminal/mine/off/")
+            .then(resp => {
+              resolve(resp);
+            });
+>>>>>>> cebc7aafc039c4d0632d1fed254933c8105a0444
         }
         commit("logout");
         localStorage.removeItem("token");
