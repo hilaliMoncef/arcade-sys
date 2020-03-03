@@ -41,7 +41,7 @@ export default {
     this.$http.get("terminal/mine/play/");
     this.$store.commit("startGameSession");
     this.$store.commit("stopListening");
-    let command = "retroarch -L " + this.currentGame.path;
+    let command = "retroarch"; //-L " + this.currentGame.path;
     this.startShell(command);
     // .then(resp => {
     //   this.$store.commit("startListening");

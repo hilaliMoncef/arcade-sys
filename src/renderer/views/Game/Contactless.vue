@@ -133,9 +133,33 @@ export default {
     }
   },
   mounted: function() {
-    setTimeout(() => this.pay(this.$route.params.amount), 500);
+    //setTimeout(() => this.pay(this.$route.params.amount), 500);
+    setTimeout(() => this.skipPayment(this.$route.params.amount), 15000);
   },
   methods: {
+    skipPayment: function(amount) {
+      this.payment = {
+        donator: this.$store.state.session.donator,
+        terminal: this.$store.state.session.terminal,
+        campaign: this.$store.state.session.campaign,
+        game: this.$store.state.session.game,
+        date: new Date(),
+        method: "Contactless",
+        status: "Accepted",
+        amount: amount,
+        currency: "EUR"
+      };
+      this.$http
+        .post("payment/", this.payment)
+        .then(resp => {
+          if (resp.status == "201") {
+            this.$router.push("/watch");
+          }
+        })
+        .catch(err => {
+          console.log(err.response);
+        });
+    },
     launchPayment: function(amount) {
       var edge = require("electron-edge-js");
       var pay = edge.func({
