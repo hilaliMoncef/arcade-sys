@@ -217,14 +217,15 @@ export default new Vuex.Store({
           axios.get("terminal/mine/off/").then(resp => {
             resolve(resp);
           });
-        commit("logout");
-        localStorage.removeItem("token");
-        localStorage.removeItem("user_id");
-        localStorage.removeItem("is_admin");
-        localStorage.removeItem("is_superadmin");
-        delete axios.defaults.headers.common["Authorization"];
-      }
-    });
+          commit("logout");
+          localStorage.removeItem("token");
+          localStorage.removeItem("user_id");
+          localStorage.removeItem("is_admin");
+          localStorage.removeItem("is_superadmin");
+          delete axios.defaults.headers.common["Authorization"];
+        }
+      });
+    }
   },
   getters: {
     isLoggedIn: state => !!state.token,
