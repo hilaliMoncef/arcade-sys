@@ -218,9 +218,6 @@ export default new Vuex.Store({
             .get("terminal/mine/off/")
             .then(resp => {
               resolve(resp);
-            })
-            .catch(err => {
-              console.log(err.response);
             });
         }
         commit("logout");
