@@ -7,3 +7,12 @@
 ```bash
 # Documentation available soon..
 ```
+
+
+#### What's on the OS ?
+- RetroArch 1.7.7 installed and configured
+- GPIOnext ?
+- Front AppImage
+- Environnement Variables
+- Logins & password per terminal
+- 
