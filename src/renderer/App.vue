@@ -27,6 +27,7 @@
 
 <script>
 const { ipcRenderer } = require("electron");
+var gpio = require("onoff").Gpio;
 
 export default {
   name: "App",
@@ -52,6 +53,9 @@ export default {
       if (val) {
         this.restartApp();
       }
+    },
+    right: function(val) {
+      console.log(val);
     }
   },
   mounted: function() {
@@ -79,6 +83,144 @@ export default {
       restartButton.classList.remove("d-none");
       notification.classList.remove("d-none");
     });
+    
+    // Gamepad Custom API
+    var btnA = new gpio(20, "in", "both");
+    btnA.watch(function(err, value) {
+      this.$store.commit("toggleA", true);
+      setTimeout(() => {
+        this.$store.commit("toggleA", false);
+      }, 10);
+     }.bind(this));
+     
+     var btnAbis = new gpio(24, "in", "both", {debounceTimeout: 10});
+      btnAbis.watch(function(err, value) {
+        this.$store.commit("toggleA", true);
+        setTimeout(() => {
+          this.$store.commit("toggleA", false);
+        }, 10);
+       }.bind(this));
+       
+       
+      var btnB = new gpio(21, "in", "both", {debounceTimeout: 10});
+    btnB.watch(function(err, value) {
+      this.$store.commit("toggleB", true);
+      setTimeout(() => {
+        this.$store.commit("toggleB", false);
+      }, 10);
+     }.bind(this));
+     
+     var btnBbis = new gpio(25, "in", "both", {debounceTimeout: 10});
+      btnBbis.watch(function(err, value) {
+        this.$store.commit("toggleB", true);
+        setTimeout(() => {
+          this.$store.commit("toggleB", false);
+        }, 10);
+       }.bind(this));
+       
+       
+       var btnX = new gpio(7, "in", "both", {debounceTimeout: 10});
+    btnX.watch(function(err, value) {
+      this.$store.commit("toggleX", true);
+      setTimeout(() => {
+        this.$store.commit("toggleX", false);
+      }, 10);
+     }.bind(this));
+     
+     var btnXbis = new gpio(15, "in", "both", {debounceTimeout: 10});
+      btnXbis.watch(function(err, value) {
+        this.$store.commit("toggleX", true);
+        setTimeout(() => {
+          this.$store.commit("toggleX", false);
+        }, 10);
+       }.bind(this));
+       
+       
+       var btnY = new gpio(12, "in", "both", {debounceTimeout: 10});
+    btnY.watch(function(err, value) {
+      this.$store.commit("toggleY", true);
+      setTimeout(() => {
+        this.$store.commit("toggleY", false);
+      }, 10);
+     }.bind(this));
+     
+     var btnYbis = new gpio(18, "in", "both", {debounceTimeout: 10});
+      btnYbis.watch(function(err, value) {
+        this.$store.commit("toggleY", true);
+        setTimeout(() => {
+          this.$store.commit("toggleY", false);
+        }, 10);
+       }.bind(this));
+       
+       
+       var btnLeft = new gpio(27, "in", "both", {debounceTimeout: 10});
+    btnLeft.watch(function(err, value) {
+      this.$store.commit("toggleLeft", true);
+      setTimeout(() => {
+        this.$store.commit("toggleLeft", false);
+      }, 10);
+     }.bind(this));
+     
+     var btnLeftYbis = new gpio(6, "in", "both", {debounceTimeout: 10});
+      btnLeftYbis.watch(function(err, value) {
+        this.$store.commit("toggleLeft", true);
+        setTimeout(() => {
+          this.$store.commit("toggleLeft", false);
+        }, 10);
+       }.bind(this));
+       
+       
+       var btnRight = new gpio(22, "in", "both", {debounceTimeout: 10});
+    btnRight.watch(function(err, value) {
+    
+      this.$store.commit("toggleRight", true);
+      setTimeout(() => {
+        this.$store.commit("toggleRight", false);
+      }, 10);
+     }.bind(this));
+     
+     var btnRightbis = new gpio(13, "in", "both", {debounceTimeout: 10});
+      btnRightbis.watch(function(err, value) {
+        this.$store.commit("toggleRight", true);
+        setTimeout(() => {
+          this.$store.commit("toggleRight", false);
+        }, 10);
+       }.bind(this));
+       
+       
+       var btnTop = new gpio(4, "in", "both", {debounceTimeout: 10});
+    btnTop.watch(function(err, value) {
+      this.$store.commit("toggleTop", true);
+      setTimeout(() => {
+        this.$store.commit("toggleTop", false);
+      }, 10);
+     }.bind(this));
+     
+     var btnTopbis = new gpio(11, "in", "both", {debounceTimeout: 10});
+      btnTopbis.watch(function(err, value) {
+        this.$store.commit("toggleTop", true);
+        setTimeout(() => {
+          this.$store.commit("toggleTop", false);
+        }, 10);
+       }.bind(this));
+       
+       
+       var btnBottom = new gpio(17, "in", "both", {debounceTimeout: 10});
+    btnBottom.watch(function(err, value) {
+      this.$store.commit("toggleBottom", true);
+      setTimeout(() => {
+        this.$store.commit("toggleBottom", false);
+      }, 10);
+     }.bind(this));
+     
+     var btnBottombis = new gpio(5, "in", "both", {debounceTimeout: 10});
+      btnBottombis.watch(function(err, value) {
+        this.$store.commit("toggleBottom", true);
+        setTimeout(() => {
+          this.$store.commit("toggleBottom", false);
+        }, 10);
+       }.bind(this));
+    
   },
   methods: {
     restartApp: function() {
