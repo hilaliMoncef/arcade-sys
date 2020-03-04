@@ -49,11 +49,7 @@ export default {
     this.$store.commit("startGameSession");
     this.$store.commit("stopListening");
     
-    var pathAPI = require("path");
-    var absolutePathCore = pathAPI.resolve("src/renderer/assets/cores/genesis_plus_gx_libretro.so");
-    var absolutePathRom = pathAPI.resolve("src/renderer/assets/cores/roms/"+ this.currentGame.path);
-    
-    let command = 'retroarch -L "' + absolutePathCore +'" "'+ absolutePathRom +'"';
+    let command = 'retroarch -L "/home/pi/genesis_plus_gx_libretro.so" "/home/pi/'+ this.currentGame.path +'"';
     this.startShell(command);
     // .then(resp => {
     //   this.$store.commit("startListening");
