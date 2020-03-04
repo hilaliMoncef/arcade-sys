@@ -18,7 +18,7 @@
             </span>
             <div class="col-2 offset-5">
               <div class="logo-circle">
-                <img src="@/assets/img/msf.png" />
+                <img :src="campaign.logo" :alt="campaign.name" />
               </div>
             </div>
           </div>
@@ -32,7 +32,7 @@
                   class="form-control"
                 />
               </div>
-              <div class="row mt-5">
+              <div class="row mt-5 d-flex flex-column">
                 <div class="form-check">
                   <label
                     class="form-check-label text-uppercase font-weight-bold "
@@ -124,7 +124,8 @@ export default {
   },
   data: function() {
     return {
-      donator: {}
+      donator: {},
+      campaign: this.$store.state.currentCampaign
     };
   },
   computed: {

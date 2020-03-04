@@ -13,14 +13,9 @@ export default {
     };
   },
   mounted: function() {
-    var gpio = require("onoff").Gpio;
-     var pushButton = new gpio(35, "in", "both");
-     pushButton.watch(function(err, value) {
-       if (err) {
-         throw err;
-       }
-      console.log(value);
-     });
+    var path = require("path");
+    var absolutePath = path.resolve("src/renderer/assets/cores/genesis_plus_gx_libretro.so");
+    console.log(absolutePath);
   },
   methods: {}
 };

@@ -48,7 +48,12 @@ export default {
     this.$http.get("terminal/mine/play/");
     this.$store.commit("startGameSession");
     this.$store.commit("stopListening");
-    let command = "retroarch"; //-L " + this.currentGame.path;
+    
+    var pathAPI = require("path");
+    var absolutePathCore = pathAPI.resolve("src/renderer/assets/cores/genesis_plus_gx_libretro.so");
+    var absolutePathRom = pathAPI.resolve("src/renderer/assets/cores/roms/"+ this.currentGame.path);
+    
+    let command = 'retroarch -L "' + absolutePathCore +'" "'+ absolutePathRom +'"';
     this.startShell(command);
     // .then(resp => {
     //   this.$store.commit("startListening");
