@@ -2,15 +2,16 @@
   <div class="h-100 w-100">
     <vue-element-loading :active="loading" is-full-screen />
     <div
-      class="d-flex align-items-center justify-content-center bg-gradient text-white"
+      class="h-100 w-100 d-flex align-items-center justify-content-center bg-gradient text-white"
     >
-      <div class="row">
+      <div class="row d-flex flex-column">
         <h1 class="display-4 text-center text-white">
           Le jeu a débuté
         </h1>
         <p class="lead text-white">
-          Veuillez patienter, votre partie va se lancer
+          Veuillez patienter, votre partie va se lancer.
         </p>
+        <p><strong>Status</strong> : {{ this.status }}</p>
       </div>
     </div>
   </div>
@@ -25,7 +26,8 @@ export default {
     return {
       currentGame: this.$store.state.currentGame,
       shell: {},
-      loading: false
+      loading: false,
+      status: ""
     };
   },
   components: {
@@ -51,21 +53,19 @@ export default {
     
     let command = 'retroarch -L "/home/pi/genesis_plus_gx_libretro.so" "/home/pi/'+ this.currentGame.path +'"';
     this.startShell(command);
-    // .then(resp => {
-    //   this.$store.commit("startListening");
-    //   this.endGame();
-    // });
   },
   methods: {
     startShell: function(command) {
       var exec = require("child_process").exec;
       var shell = exec(command, (error, stdout, stderr) => {
         if (error) {
-          console.warn(error);
-        }
-        console.log(stdout);
+          this.status = error;
+          this.loading = false;
+        } else {
+        this.status = stdout;
         this.$store.commit("startListening");
         this.endGame();
+        }
       });
       var timer = setTimeout(function() {
         exec('killall "retroarch"');
