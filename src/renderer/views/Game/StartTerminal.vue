@@ -1,5 +1,6 @@
 <template>
   <div class="h-100 w-100">
+    <vue-element-loading :active="loading" is-full-screen />
     <div v-if="terminal.is_active" class="h-100 w-100">
       <div class="h-100 w-100">
         <div class="splited-view d-flex flex-column">
@@ -143,7 +144,7 @@
         </div>
       </div>
     </div>
-    <div v-else>
+    <div v-else-if="!terminal.is_active & !loading">
       <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
         <h1 class="display-4">
           Borne désactivée
@@ -158,6 +159,8 @@
 </template>
 
 <script>
+import VueElementLoading from "vue-element-loading";
+
 export default {
   name: "StartTerminal",
   data: function() {
@@ -173,8 +176,12 @@ export default {
       choosenIndexOf: {
         games: "",
         campaigns: ""
-      }
+      },
+      loading: false
     };
+  },
+  components: {
+    VueElementLoading
   },
   computed: {
     a() {
@@ -244,6 +251,7 @@ export default {
   },
   mounted: function() {
     this.isAdmin = this.$store.getters.isAdmin;
+    this.loading = true;
     if (!this.isAdmin) {
       this.$http
         .get("terminal/mine/")
@@ -263,6 +271,7 @@ export default {
           this.chooseGame(0);
           this.choosenGame = this.games[0];
           this.$store.commit("startListening");
+          this.loading = false;
         })
         .catch(err => {
           console.error(err.response);

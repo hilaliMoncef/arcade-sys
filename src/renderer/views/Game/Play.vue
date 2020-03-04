@@ -1,29 +1,35 @@
 <template>
-  <div class="col-6 offset-3">
-    <div class="row">
-      <h1 class="display-4 text-center">
-        Le jeu a débuté
-      </h1>
-      <p class="lead">
-        Veuillez patienter, votre partie va se lancer
-      </p>
-    </div>
-    <div class="row">
-      <button class="btn btn-primary mx-auto" @click.prevent="endGame">
-        Appuyer sur <span class="g-btn">A</span> pour continuer
-      </button>
+  <div class="h-100 w-100">
+    <vue-element-loading :active="loading" is-full-screen />
+    <div
+      class="d-flex align-items-center justify-content-center bg-gradient text-white"
+    >
+      <div class="row">
+        <h1 class="display-4 text-center text-white">
+          Le jeu a débuté
+        </h1>
+        <p class="lead text-white">
+          Veuillez patienter, votre partie va se lancer
+        </p>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import VueElementLoading from "vue-element-loading";
+
 export default {
   name: "Play",
   data: function() {
     return {
       currentGame: this.$store.state.currentGame,
-      shell: {}
+      shell: {},
+      loading: false
     };
+  },
+  components: {
+    VueElementLoading
   },
   computed: {
     a() {
@@ -38,6 +44,7 @@ export default {
     }
   },
   mounted: function() {
+    this.loading = true;
     this.$http.get("terminal/mine/play/");
     this.$store.commit("startGameSession");
     this.$store.commit("stopListening");
@@ -64,6 +71,7 @@ export default {
       }, 40000);
     },
     endGame: function() {
+      this.loading = false;
       this.$router.push("/endgame");
     }
   }

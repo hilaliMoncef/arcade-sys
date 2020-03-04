@@ -13,16 +13,14 @@ export default {
     };
   },
   mounted: function() {
-    var gpio = require("onoff");
-
-    var pushButton = new gpio(35, "in", "both");
-
-    pushButton.watch(function(err, value) {
-      if (err) {
-        throw err;
-      }
-      console.log(value);
-    });
+    //var gpio = require("onoff");
+    // var pushButton = new gpio(35, "in", "both");
+    // pushButton.watch(function(err, value) {
+    //   if (err) {
+    //     throw err;
+    //   }
+    //   console.log(value);
+    // });
   },
   methods: {}
 };
