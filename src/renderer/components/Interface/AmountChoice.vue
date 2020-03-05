@@ -201,7 +201,7 @@ export default {
       });
     },
     proceed: function() {
-      if (this.choosenIndexOf) {
+      if (this.choosenIndexOf != null) {
         this.$emit("nextView");
       } else {
         this.$emit("error", {
