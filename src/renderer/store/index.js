@@ -16,22 +16,6 @@ export default new Vuex.Store({
     is_superadmin: localStorage.getItem("is_superadmin") == "true" || "",
     maxGames: 3,
     maxCampaigns: 3,
-    currentDonator: "",
-    newDonatorEmail: "",
-    currentTerminal: "",
-    currentCampaign: "",
-    currentGame: "",
-    session: {
-      terminal: "",
-      donator: "",
-      start_global: null,
-      end_global: null,
-      start_time: null,
-      end_time: null,
-      position_asso: "",
-      campaign: "",
-      game: null
-    },
     gamepad: {
       listening: true,
       A: false,
@@ -96,54 +80,6 @@ export default new Vuex.Store({
       state.user_id = "";
       state.is_admin = false;
       state.is_superadmin = false;
-    },
-    saveCurrentDonator(state, donator) {
-      state.currentDonator = donator;
-      state.session.donator = donator.id;
-    },
-    saveCurrentTerminal(state, terminal) {
-      state.currentTerminal = terminal;
-    },
-    startTerminal(state, payload) {
-      state.currentTerminal = payload.terminal;
-    },
-    stopTerminal(state) {
-      state.currentTerminal = "";
-      state.currentCampaign = "";
-    },
-    saveNewDonatorEmail(state, email) {
-      state.newDonatorEmail = email;
-    },
-    deleteGamingStates(state) {
-      state.newDonatorEmail = "";
-      state.currentDonator = "";
-      state.currentPayment = {};
-      state.currentTerminal = "";
-      state.currentCampaign = "";
-      state.currentGame = "";
-      state.session = {};
-    },
-    startSession(state) {
-      state.session.start_global = new Date();
-    },
-    endSession(state) {
-      state.session.end_global = new Date();
-    },
-    startGameSession(state) {
-      state.session.start_time = new Date();
-    },
-    endGameSession(state) {
-      state.session.end_time = new Date();
-    },
-    saveCampaignChoice(state, payload) {
-      state.session.campaign = payload.campaign.id;
-      state.currentCampaign = payload.campaign;
-      state.session.terminal = state.currentTerminal.id;
-      state.session.position_asso = payload.indexOf;
-    },
-    saveGameChoice(state, payload) {
-      state.currentGame = payload;
-      state.session.game = payload.id;
     },
     setSessionId(state, id) {
       state.session.id = id;
