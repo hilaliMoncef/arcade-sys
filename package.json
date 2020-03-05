@@ -1,6 +1,6 @@
 {
   "name": "puls-front",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "author": "Moncef HILALI",
   "description": "A complete system to manage Arcade terminal capable of running retro games with donations management.",
   "license": "GNU AGPLv3",
