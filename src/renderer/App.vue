@@ -82,8 +82,6 @@ export default {
       restartButton.classList.remove("d-none");
       notification.classList.remove("d-none");
     });
-    
-    
   },
   methods: {
     restartApp: function() {
@@ -117,12 +115,12 @@ export default {
 
       var gp = this.gamepads[0];
       if (this.$store.state.gamepad.listening) {
-        if (this.buttonPressed(gp.buttons[0])) {
+        if (this.buttonPressed(gp.buttons[1])) {
           this.$store.commit("toggleA", true);
         } else {
           this.$store.commit("toggleA", false);
         }
-        if (this.buttonPressed(gp.buttons[1])) {
+        if (this.buttonPressed(gp.buttons[0])) {
           this.$store.commit("toggleB", true);
         } else {
           this.$store.commit("toggleB", false);
@@ -137,7 +135,7 @@ export default {
         } else {
           this.$store.commit("toggleY", false);
         }
-        if (this.buttonPressed(gp.buttons[9])) {
+        if (this.buttonPressed(gp.buttons[8])) {
           this.$store.commit("toggleStart", true);
         } else {
           this.$store.commit("toggleStart", false);

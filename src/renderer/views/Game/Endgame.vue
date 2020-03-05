@@ -23,7 +23,7 @@
             </div>
           </div>
           <div class="container mt-5">
-            <div class="col-8 offset-2">
+            <div class="col-8 offset-2" v-if="noMsg">
               <div class="row">
                 <label class="h5 text-white" for="email">Mail</label>
                 <input
@@ -80,6 +80,12 @@
                 <SimpleKeyboard :input="donator.email" @onChange="onChange" />
               </div>
             </div>
+            <div
+              class="col-8 offset-2 d-flex align-items-center justify-content-center"
+              v-else
+            >
+              <h2 class="text-white">Merci pour votre don !</h2>
+            </div>
           </div>
         </div>
         <div class="big-gamepad bg-gradient d-flex px-4 py-2">
@@ -125,7 +131,8 @@ export default {
   data: function() {
     return {
       donator: {},
-      campaign: this.$store.state.currentCampaign
+      campaign: this.$store.state.currentCampaign,
+      noMsg: true
     };
   },
   computed: {
@@ -149,18 +156,22 @@ export default {
       }
     },
     x: function(val) {
-      if (val) {
+      if (val & !this.noMsg) {
         this.donator.accept_newsletter = !this.donator.accept_newsletter;
       }
     },
     y: function(val) {
-      if (val) {
+      if (val & !this.noMsg) {
         this.donator.accept_asso = !this.donator.accept_asso;
       }
     },
     start: function(val) {
       if (val) {
-        this.saveEmail();
+        if (this.noMsg) {
+          this.$router.push("/start");
+        } else {
+          this.saveEmail();
+        }
       }
     }
   },
