@@ -13,17 +13,18 @@
       {{ error }}
     </div>
 
-    <div class="d-flex justify-content-center">
-      <div class="spinner-border text-success" role="status">
-        <span class="sr-only">Loading...</span>
-      </div>
-    </div>
+    <vue-element-loading :active="loading" is-full-screen />
   </div>
 </template>
 
 <script>
+import VueElementLoading from "vue-element-loading";
+
 export default {
   name: "Auth",
+  components: {
+    VueElementLoading
+  },
   data: function() {
     return {
       credentials: {
@@ -35,8 +36,8 @@ export default {
     };
   },
   mounted: function() {
+    this.loading = true;
     this.$store.dispatch("logout");
-    this.$router.push("/login");
     if (this.$store.getters.isLoggedIn) {
       this.$router.push("/start");
     } else {
@@ -45,7 +46,6 @@ export default {
   },
   methods: {
     login: function() {
-      this.loading = true;
       this.$store
         .dispatch("login", this.credentials)
         .then(() => this.$router.push("/start"))

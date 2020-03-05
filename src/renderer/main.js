@@ -56,35 +56,6 @@ if (token) {
   Vue.prototype.$http.defaults.headers.common["Authorization"] = token;
 }
 
-//console.log(Vue.prototype.$http.defaults);
-//"D:\\hilal\\Documents\\Web Dev\\electron-test\\src\\renderer\\assets\\cores\\blastem_libretro.dll" "D:\\hilal\\Documents\\Web Dev\\electron-test\\src\\renderer\\assets\\roms\\Sonic.md")
-
-// Add a request interceptor
-Vue.prototype.$http.interceptors.request.use(
-  function(config) {
-    Vue.prototype.$Progress.start();
-    return config;
-  },
-  function(error) {
-    // Do something with request error
-    Vue.prototype.$Progress.fail();
-    return Promise.reject(error);
-  }
-);
-
-// Add a response interceptor
-Vue.prototype.$http.interceptors.response.use(
-  response => {
-    Vue.prototype.$Progress.finish();
-    return response;
-  },
-  error => {
-    // Error handling part
-    Vue.prototype.$Progress.fail();
-    return error;
-  }
-);
-
 new Vue({
   router,
   store,
