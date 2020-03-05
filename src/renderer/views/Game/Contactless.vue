@@ -134,7 +134,7 @@ export default {
   },
   mounted: function() {
     //setTimeout(() => this.pay(this.$route.params.amount), 500);
-    setTimeout(() => this.skipPayment(this.$route.params.amount), 15000);
+    setTimeout(() => this.skipPayment(this.$route.params.amount), 17000);
   },
   methods: {
     skipPayment: function(amount) {

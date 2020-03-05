@@ -50,8 +50,11 @@ export default {
     this.$http.get("terminal/mine/play/");
     this.$store.commit("startGameSession");
     this.$store.commit("stopListening");
-    
-    let command = 'retroarch -L "/home/pi/genesis_plus_gx_libretro.so" "/home/pi/'+ this.currentGame.path +'"';
+
+    let command =
+      'retroarch -L "/home/pi/genesis_plus_gx_libretro.so" "/home/pi/' +
+      this.currentGame.path +
+      '"';
     this.startShell(command);
   },
   methods: {
@@ -62,14 +65,14 @@ export default {
           this.status = error;
           this.loading = false;
         } else {
-        this.status = stdout;
-        this.$store.commit("startListening");
-        this.endGame();
+          this.status = stdout;
+          this.$store.commit("startListening");
+          this.endGame();
         }
       });
       var timer = setTimeout(function() {
         exec('killall "retroarch"');
-      }, 40000);
+      }, 300000);
     },
     endGame: function() {
       this.loading = false;

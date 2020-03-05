@@ -140,22 +140,22 @@ export default {
         } else {
           this.$store.commit("toggleStart", false);
         }
-        if (gp.axes[0] == 1) {
+        if (gp.axes[0] > 0.7) {
           this.$store.commit("toggleRight", true);
         } else {
           this.$store.commit("toggleRight", false);
         }
-        if (gp.axes[0] == -1) {
+        if (gp.axes[0] < -0.7) {
           this.$store.commit("toggleLeft", true);
         } else {
           this.$store.commit("toggleLeft", false);
         }
-        if (gp.axes[1] == -1) {
+        if (gp.axes[1] < -0.7) {
           this.$store.commit("toggleTop", true);
         } else {
           this.$store.commit("toggleTop", false);
         }
-        if (gp.axes[1] == 1) {
+        if (gp.axes[1] > 0.7) {
           this.$store.commit("toggleBottom", true);
         } else {
           this.$store.commit("toggleBottom", false);

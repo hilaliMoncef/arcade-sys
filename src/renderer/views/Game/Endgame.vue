@@ -23,7 +23,7 @@
             </div>
           </div>
           <div class="container mt-5">
-            <div class="col-8 offset-2" v-if="noMsg">
+            <div class="col-8 offset-2" v-if="!noMsg">
               <div class="row">
                 <label class="h5 text-white" for="email">Mail</label>
                 <input
@@ -114,7 +114,7 @@
         <div
           class="small-btn-gamepad d-flex align-items-center justify-content-center p-4 mb-3 pr-5"
         >
-          <span><span class="g-btn">L</span>Envoyer</span>
+          <span><span class="g-btn">B</span>Retour</span>
         </div>
       </div>
     </div>
