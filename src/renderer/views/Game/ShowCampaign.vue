@@ -24,7 +24,7 @@
           </div>
           <div class="container my-3 text-center">
             <youtube
-              :video-id="videoId"
+              :video-id="campaign.video"
               :player-vars="playerVars"
               ref="youtube"
               @playing="playerPlaying()"
