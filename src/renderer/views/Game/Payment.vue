@@ -28,7 +28,7 @@
               </div>
             </div>
           </div>
-          <div class="container-fluid px-5 my-5 h-100">
+          <div class="container px-5 my-5 h-100">
             <div class="row d-flex align-items-start justify-content-between">
               <div
                 v-for="(amount, index) in amounts"
