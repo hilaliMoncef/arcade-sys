@@ -76,13 +76,13 @@
 
 <script>
 import VueElementLoading from "vue-element-loading";
-import Error from "@/components/interface/Error.vue";
-import Start from "@/components/interface/Start.vue";
-import AmountChoice from "@/components/interface/AmountChoice.vue";
-import Payment from "@/components/interface/Payment.vue";
-import CampaignDetail from "@/components/interface/CampaignDetail.vue";
-import Play from "@/components/interface/Play.vue";
-import End from "@/components/interface/End.vue";
+import Error from "@/components/Interface/Error.vue";
+import Start from "@/components/Interface/Start.vue";
+import AmountChoice from "@/components/Interface/AmountChoice.vue";
+import Payment from "@/components/Interface/Payment.vue";
+import CampaignDetail from "@/components/Interface/CampaignDetail.vue";
+import Play from "@/components/Interface/Play.vue";
+import End from "@/components/Interface/End.vue";
 
 export default {
   name: "Home",
