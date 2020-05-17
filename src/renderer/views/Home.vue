@@ -94,7 +94,7 @@ export default {
     Payment,
     CampaignDetail,
     Play,
-    End
+    End,
   },
   data: function() {
     return {
@@ -102,7 +102,7 @@ export default {
       errors: {
         visible: false,
         title: "",
-        errors: {}
+        errors: {},
       },
       viewIndex: 1,
       maxViewIndex: 5,
@@ -120,14 +120,13 @@ export default {
         end_time: null,
         position_asso: null,
         position_game: null,
-        position_amount: null
+        position_amount: null,
       },
       campaigns: {},
-      games: {}
+      games: {},
     };
   },
   mounted: function() {
-    console.log("is remounted ?");
     this.session = {
       terminal: {},
       campaign: {},
@@ -140,7 +139,7 @@ export default {
       end_time: null,
       position_asso: null,
       position_game: null,
-      position_amount: null
+      position_amount: null,
     };
     this.loading = true;
     // First checking if logged in
@@ -153,7 +152,7 @@ export default {
     this.$store.commit("startListening");
     this.$http
       .get("terminal/mine/")
-      .then(resp => {
+      .then((resp) => {
         this.terminal = resp.data.terminal;
         this.campaigns = resp.data.campaigns;
         this.games = resp.data.games;
@@ -168,11 +167,11 @@ export default {
         // Stop the loading spinner
         this.loading = false;
       })
-      .catch(err => {
+      .catch((err) => {
         this.errors = {
           visible: true,
           title: "Erreur de chargement",
-          errors: err.response.data
+          errors: err.response.data,
         };
         this.loading = false;
       });
@@ -196,18 +195,18 @@ export default {
       this.loading = true;
       this.$http
         .post("payment/", payload.payment)
-        .then(resp => {
+        .then((resp) => {
           if (resp.status == "201") {
             this.loading = false;
             this.nextView();
           }
         })
-        .catch(err => {
+        .catch((err) => {
           this.loading = false;
           this.errors = {
             visible: true,
             title: "Erreur d'enregistrement",
-            errors: err.response.data
+            errors: err.response.data,
           };
         });
     },
@@ -218,17 +217,17 @@ export default {
       // Creating a new donator for the session
       this.$http
         .post("donator/", {})
-        .then(resp => {
+        .then((resp) => {
           this.session.terminal = this.terminal; // Binding the terminal to the session
           this.session.start_global = new Date(); // Starting global timer for session
           this.session.donator = resp.data; // Binding the donator to the session
           this.loading = false;
         })
-        .catch(err => {
+        .catch((err) => {
           this.errors = {
             visible: true,
             title: "Erreur de session",
-            errors: err.response.data
+            errors: err.response.data,
           };
           this.loading = false;
         });
@@ -238,21 +237,21 @@ export default {
       this.$http
         .get("terminal/mine/play/")
         .then()
-        .catch(err => {
+        .catch((err) => {
           this.errors = {
             visible: true,
             title: "Erreur de status de jeu",
-            errors: err.response.data
+            errors: err.response.data,
           };
         }); // Activating Playing status on backend
     },
     endGameSession: function() {
       this.session.end_time = new Date(); // Ending gaming timer for session
-      this.$http.get("terminal/mine/gameover/").catch(err => {
+      this.$http.get("terminal/mine/gameover/").catch((err) => {
         this.errors = {
           visible: true,
           title: "Impossible d'éteindre la borne",
-          errors: err.response.data
+          errors: err.response.data,
         };
       });
     },
@@ -263,11 +262,11 @@ export default {
       this.session.campaign = this.session.campaign.id;
       this.session.game = this.session.game.id;
 
-      this.$http.post("session/", this.session).catch(err => {
+      this.$http.post("session/", this.session).catch((err) => {
         this.errors = {
           visible: true,
           title: "Erreur de sauvegarde de session",
-          errors: err.response.data
+          errors: err.response.data,
         };
       });
     },
@@ -292,7 +291,7 @@ export default {
       this.errors = {
         visible: false,
         title: "",
-        errors: []
+        errors: [],
       };
     },
     shuffleArray: function(array) {
@@ -300,7 +299,7 @@ export default {
         const j = Math.floor(Math.random() * (i + 1));
         [array[i], array[j]] = [array[j], array[i]];
       }
-    }
-  }
+    },
+  },
 };
 </script>

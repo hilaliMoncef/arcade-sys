@@ -64,6 +64,7 @@ export default {
   name: "Payment",
   props: ["session"],
   mounted: function() {
+    // IN PRODUCTION UNCOMMENT THIS
     // For paying with PayterTerminal
     // if (this.session.amount) {
     //   setTimeout(() => this.pay(this.session.amount), 1000); // Adding a one second timeout to wait for divs to load
@@ -71,6 +72,7 @@ export default {
     //   this.$emit("lastView");
     // }
 
+    // FOR DEV PURPOSE ONLY
     // For skipping payment
     setTimeout(() => this.skipPayment(this.session.amount), 3000);
   },
@@ -85,21 +87,23 @@ export default {
         method: "Manual",
         status: "Accepted",
         amount: amount,
-        currency: "EUR"
+        currency: "EUR",
       };
 
       this.$emit("savePayment", { payment: this.payment });
     },
     launchPayment: function(amount) {
+      // Here we use Electron Edge JS to execute a C# script (edje-script.csx) along with a Customized Payter DLL.
+      // This script only launches a series of functions in the PayPay customized DLL and receives bunch of error code.
       var edge = require("electron-edge-js");
       var pay = edge.func({
         source: "edje-script.csx",
-        references: ["PayterPay.dll"]
+        references: ["PayterPay.dll"],
       });
 
       var payload = {
         amount: amount,
-        timeout: 15 // Default timeout
+        timeout: 15, // Default timeout
       };
 
       var result = pay(payload, true);
@@ -107,7 +111,7 @@ export default {
     },
     pay: function(amount) {
       if (this.session.amount != null) {
-        // Calling PayterPay from here
+        // Calling PayterPay script from here
         var result = this.launchPayment(amount);
 
         this.payment = {
@@ -119,10 +123,10 @@ export default {
           method: "Contactless",
           status: "",
           amount: amount,
-          currency: "EUR"
+          currency: "EUR",
         };
 
-        // Checking response
+        // Checking response from the Payter Pay DLL
         switch (result) {
           case 0:
             // APPROVED
@@ -135,9 +139,10 @@ export default {
               visible: true,
               title: "Paiement décliné",
               errors: [
-                "Votre paiement a été refusé. Veuillez contacter votre émetteur de carte."
-              ]
+                "Votre paiement a été refusé. Veuillez contacter votre émetteur de carte.",
+              ],
             });
+            this.$emit("savePayment", { payment: this.payment });
             break;
           case -1:
             // CONNECTION ERROR
@@ -145,8 +150,8 @@ export default {
               visible: true,
               title: "Erreur de connexion au terminal",
               errors: [
-                "Il y a un problème de connexion au terminal de paiement. Veuillez réessayer ou contacter le support."
-              ]
+                "Il y a un problème de connexion au terminal de paiement. Veuillez réessayer ou contacter le support.",
+              ],
             });
             break;
           case -5:
@@ -155,8 +160,8 @@ export default {
               visible: true,
               title: "Temps écoulé",
               errors: [
-                "Vous avez mis trop de temps à passer votre carte. L'opération est annulée, veuillez réessayer."
-              ]
+                "Vous avez mis trop de temps à passer votre carte. L'opération est annulée, veuillez réessayer.",
+              ],
             });
             break;
           case -6:
@@ -165,8 +170,8 @@ export default {
               visible: true,
               title: "Carte invalide",
               errors: [
-                "Votre carte est invalide. Veuillez réessayer ou contacter le support."
-              ]
+                "Votre carte est invalide. Veuillez réessayer ou contacter le support.",
+              ],
             });
             break;
           default:
@@ -175,13 +180,13 @@ export default {
               visible: true,
               title: "Erreur inconnue",
               errors: [
-                "Un problème inconnu est survenu. Veuillez réessayer ou contacter le support."
-              ]
+                "Un problème inconnu est survenu. Veuillez réessayer ou contacter le support.",
+              ],
             });
             break;
         }
       }
-    }
-  }
+    },
+  },
 };
 </script>
