@@ -59,6 +59,7 @@ export default {
       var exec = require("child_process").exec;
       var shell = exec(command, (error, stdout, stderr) => {
         if (error) {
+console.log(error);
           this.status = error;
           this.loading = false;
           this.endGame();
