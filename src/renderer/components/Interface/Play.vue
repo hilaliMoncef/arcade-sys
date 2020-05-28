@@ -19,6 +19,7 @@
 
 <script>
 import VueElementLoading from "vue-element-loading";
+import path from "path";
 
 export default {
   name: "Play",
@@ -43,10 +44,13 @@ export default {
     this.$store.commit("stopListening");
 
     // We then prepare the command and we launch it in a separate Node.js shell
-    let command =
-      'retroarch -L "/home/pi/genesis_plus_gx_libretro.so" "/home/pi/' +
-      this.currentGame.path +
-      '"';
+    const pathToCore = path.join(
+      __static,
+      "/cores/genesis_plus_gx_libretro.so"
+    );
+    const pathToGame = path.join(__static, "/roms/" + this.currentGame.path);
+
+    let command = 'retroarch -L "' + pathToCore + '" "' + pathToGame + '"';
     this.startShell(command);
   },
   methods: {
