@@ -44,11 +44,10 @@ export default {
     this.$store.commit("stopListening");
 
     // We then prepare the command and we launch it in a separate Node.js shell
-    const pathToCore = path.join(
-      __static,
-      "/cores/genesis_plus_gx_libretro.so"
-    );
-    const pathToGame = path.join(__static, "/roms/" + this.currentGame.path);
+    const pathToCore =
+      "/home/pi/arcade-sys-games/cores/genesis_plus_gx_libretro.so";
+    const pathToGame =
+      "/home/pi/arcade-sys-games/roms/" + this.currentGame.path;
 
     let command = 'retroarch -L "' + pathToCore + '" "' + pathToGame + '"';
     this.startShell(command);
@@ -59,7 +58,7 @@ export default {
       var exec = require("child_process").exec;
       var shell = exec(command, (error, stdout, stderr) => {
         if (error) {
-console.log(error);
+          console.log(error);
           this.status = error;
           this.loading = false;
           this.endGame();
