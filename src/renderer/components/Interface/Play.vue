@@ -47,7 +47,7 @@ export default {
     const pathToCore =
       "/home/pi/arcade-sys-games/cores/genesis_plus_gx_libretro.so";
     const pathToGame =
-      "/home/pi/arcade-sys-games/roms/" + this.currentGame.path;
+      "/home/pi/arcade-sys-games/roms/" + this.session.game.path;
 
     let command = 'retroarch -L "' + pathToCore + '" "' + pathToGame + '"';
     this.startShell(command);
