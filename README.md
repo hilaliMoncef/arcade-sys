@@ -16,8 +16,10 @@
 9 - chmod a+x LeNomDuFichier.AppImage
 10 - Add Env Variables --> sudo nano /etc/profile et ajouter à la fin "export PULS_LOGIN=LeLoginChoisi" et ensuite "export PULS_MDP=LeMDPChoisi", puis faire CTRL+X (et appuyer sur Yes pour valider puis appuyer sur Entrer)
 11 - Faire cd /home/pi et puis faire un "git clone https://github.com/hilaliMoncef/arcade-sys-games.git". Un nouveau dossier contenant les jeux et les cores sera créé. Il faudra rajouter les jeux dessus plus tard et ensuite programmer un "git pull" automatique.
-12 - Reboot
-13 - Lancer l'appImage
+12 - Il faut taper dans une commandline "retroarch", configurez les inputs du gamepad de l'utilisateur 1 (menu à droite) et configurez toutes les touches pour les deux utilisateurs.
+13 - Il faut ensuite "Sauvegarder la configuration automatique"
+14 - Reboot
+15 - Lancer l'appImage
 ```
 
 #### Prerequisites
