@@ -16,19 +16,17 @@ import {
   faLink,
   faEuroSign,
   faPlay,
-  faVideo
+  faVideo,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import VueProgressBar from "vue-progressbar";
-import VueYoutube from "vue-youtube";
-
-Vue.use(VueYoutube);
+import VueYouTube from "vue-youtube";
 
 // Loading bar stuff
 Vue.use(VueProgressBar, {
   color: "rgb(91, 184, 93)",
   failedColor: "red",
-  height: "3px"
+  height: "3px",
 });
 
 // Font Awesome Stuff
@@ -56,8 +54,10 @@ if (token) {
   Vue.prototype.$http.defaults.headers.common["Authorization"] = token;
 }
 
+Vue.use(VueYouTube);
+
 new Vue({
   router,
   store,
-  render: h => h(App)
+  render: (h) => h(App),
 }).$mount("#app");
