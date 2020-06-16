@@ -1,3 +1,12 @@
+<!--
+*** Markdown
+*** coding: utf-8
+*** Author: Nicolas Flandrois
+*** Date:   Tue 16 June 2020 11:25:31
+*** Last Modified time: Tue 16 June 2020 12:06:04 
+ -->
+
+<!-- Project Description: -->
                     GNU AFFERO GENERAL PUBLIC LICENSE
                        Version 3, 19 November 2007
 

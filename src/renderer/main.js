@@ -1,3 +1,9 @@
+/*
+* @Author: Nicolas Flandrois
+* @Date:   Tue 16 June 2020 11:18:26
+* @Last Modified by:   Nicolas Flandrois
+* @Last Modified time: Tue 16 June 2020 12:05:56 
+*/
 import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
