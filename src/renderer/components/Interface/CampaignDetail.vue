@@ -27,6 +27,7 @@
             ref="youtube"
             @ready="playerReady()"
             @playing="playerPlaying()"
+            style="width:320px; height:180px "
           ></youtube>
         </div>
         <div class="container mb-5 pb-3 mt-2 text-center">

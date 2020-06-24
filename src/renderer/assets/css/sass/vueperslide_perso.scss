@@ -1,0 +1,61 @@
+.vueperslides {
+	height: 100%;
+	width: 100%;
+}
+
+.vueperslides__track-inner {
+	margin-left: 28%;
+	margin-right: 28%;
+}
+
+$border-color : red; 
+$border-weight: 3px;
+
+.vueperslide {
+	border: {
+		top: solid $border-weight $border-color ;
+		bottom: solid $border-weight $border-color;
+		left: solid $border-weight $border-color; 
+		right: solid $border-weight $border-color;
+	}
+	height: 75vh;
+	padding: 40px;
+	transition: all 0.30s ease;
+	&:not(.vueperslide--active) {
+		opacity: 0.5;
+		transform: scale(0.8);
+	}
+}
+
+// .double-carousel {
+// 	.carousel-top {
+// 		height: 65%;
+// 		width: 100%;
+// 	}
+
+// 	.carousel-bottom {
+// 		height: 23%;
+// 		width: 100%;
+// 		margin-top: 8%;
+// 	}
+
+// 	.vueperslides__inner {
+// 		height: 100%;
+// 	}
+	
+// 	.vueperslides__track-inner {
+// 		margin-left: 28%;
+// 		margin-right: 28%;
+// 	}
+	
+// 	.vueperslide {
+// 		border: solid 3px red;
+// 		height: 100%;
+// 		padding: 40px;
+// 		transition: all 0.25s ease;
+// 		&:not(.vueperslide--active) {
+// 			opacity: 0.5;
+// 			transform: scale(0.8);
+// 		}
+// 	}
+// }

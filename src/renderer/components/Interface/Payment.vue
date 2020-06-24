@@ -19,6 +19,8 @@
               <img :src="session.campaign.logo" :alt="session.campaign.name" />
             </div>
           </div>
+          <span class="text-white"> {{ session.game.name }} </span>
+          <span class="text-white"> {{ session.amount }} </span>
         </div>
         <div class="container px-5 my-3 text-center">
           <img
@@ -74,7 +76,7 @@ export default {
 
     // FOR DEV PURPOSE ONLY
     // For skipping payment
-    setTimeout(() => this.skipPayment(this.session.amount), 3000);
+    setTimeout(() => this.skipPayment(this.session.amount), 6000);
   },
   methods: {
     skipPayment: function(amount) {

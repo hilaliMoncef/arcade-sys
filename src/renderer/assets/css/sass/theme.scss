@@ -1,0 +1,293 @@
+@font-face {
+    font-family: "Futura Std";
+    src: url("../webfonts/FuturaStd-ExtraBold.woff2") format("woff2"),
+      url("../webfonts/FuturaStd-ExtraBold.woff") format("woff");
+    font-weight: 700;
+    font-style: bold;
+  }
+  
+@font-face {
+    font-family: "Futura Std";
+    src: url("../webfonts/FuturaStd-Book.woff2") format("woff2"),
+        url("../webfonts/FuturaStd-Book.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    font-family: "Futura Std";
+    font-weight: normal;
+}
+
+.h1,.h2, .h3, .h4, .h5 {
+    font-weight: bold;
+}
+
+.component {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+.view {
+    flex: 1;
+    height: 100%;
+}
+
+
+/* TRANSITIONS */
+
+// mytr is main transition for content view 
+
+.mytr-enter-active, .mytr-leave-active {
+    transition: transform .4s cubic-bezier(.47,1.64,.41,.8); //cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.mytr-enter {
+    transform: translateX(100%);
+} 
+
+.mytr-enter-to, .mytr-leave {
+    transform: translateX(0%);
+}
+
+.mytr-leave-to {
+    transform: translateX(-100%);
+}
+
+// step-tr is transition in and out of stepping component
+.step-tr-enter-active, .step-tr-leave-active {
+    transition: transform .4s cubic-bezier(.47,1.64,.41,.8); //cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.step-tr-enter {
+    transform: translateY(-100%);
+} 
+
+.step-tr-enter-to, .step-tr-leave {
+    transform: translateY(0%);
+}
+
+.step-tr-leave-to {
+    transform: translateY(-100%);
+}
+
+/* \TRANSITIONS*/ 
+
+/* CAROUSEL */
+
+@import "vueperslide_perso.scss";
+
+.carousel {
+  height: 85vh;
+  width: 100vw;
+  margin-top: 7.5vh;
+  margin-bottom: 7.5vh;
+}
+
+%arrow {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    justify-content: center;
+    align-self: center;
+}
+
+.right-arrow {
+    @extend %arrow;
+    left: -30vh;
+    background-image: url("../img/right-arrow.svg");
+}
+
+.left-arrow {
+    @extend %arrow;
+    left: 30vh;
+    background-image: url("../img/left-arrow.svg");
+}
+
+.div-content {
+    border : solid 6px green;
+    height: 100%;
+
+    .title {
+        height: 10%;
+    }
+    
+    .picture {
+        height: 40%;
+    }
+    
+    .infos {
+        height: 15%;
+    }
+    
+    .descr {
+        height: 35%;
+    }
+}
+
+/* \CAROUSEL */
+
+/* GAMEPAD*/
+
+%g-btn {
+    color: white;
+	border-width: 2px;
+	font-weight: bold;
+}
+
+.g-btn {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid white;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    font-weight: bold;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.g-btn.clicked {
+    border-color: #fac812;
+    background-color: #fac812;
+    color: #000;
+}
+
+.small-gamepad {
+    position: absolute;
+    bottom: 0;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 14px;
+    .g-btn {
+		@extend %g-btn;
+	}
+}
+  
+.big-gamepad {
+    @extend .small-gamepad;
+    left: 0;
+    .g-btn {
+		@extend %g-btn;
+	}
+}
+
+.small-btn-gamepad { /* Validate button at right */
+    @extend .small-gamepad;
+    right: 0;
+    background-color: #fac812;
+    .g-btn {
+		@extend %g-btn;
+	}
+}
+
+/* \GAMEPAD */
+
+/* RIBBON */
+
+.ribbon {
+    position: absolute;
+    background-size: contain;
+    background-repeat: no-repeat;
+    color: white;
+    display: flex;
+    align-items: center;
+    text-transform: uppercase;
+    z-index: 5;
+}
+
+.ribbon.left {
+    top: 10px;
+    left: -10px;
+    width: 350px;
+    height: 90px;
+    justify-content: center;
+    align-self: center;
+    background-image: url("../img/left-ribbon.svg");
+}
+
+/* \RIBBON */
+
+/* BG */
+
+.bg-gradient {
+    background: rgb(53, 168, 224);
+    background: linear-gradient(
+      90deg,
+      rgba(42, 41, 95, 1) 0%,
+      rgba(61, 97, 171, 1) 100%
+    );
+  }
+  
+  .bg-gradient-diag {
+    @extend .bg-gradient;
+    background: linear-gradient(
+        130deg,
+        rgba(42, 41, 95, 1) 0%,
+        rgba(61, 97, 171, 1) 100%
+    );
+  }
+
+/* \BG */ 
+
+/* CHECKBOX */
+
+.checkbox {
+	display: flex;
+	width: 100%;
+	flex-direction: column;
+	align-items: center;
+	border: 4px solid white;
+	color: black;
+	border-radius: 25px;
+	font-weight: bold;
+	transition: 0.2s ease all;
+	input {
+		display: none;
+	}
+}
+
+.checkbox.selected {
+	border-color: #fac812;
+}
+
+/* \CHECKBOX */
+
+.amount {
+    box-sizing: content-box;
+    background-color: #3fa9f5;
+    border-radius: 20px;
+    min-height: 300px;
+  }
+  
+.amount.selected {
+    border: 3px solid #fac812 !important;
+}
+
+.logo-circle {
+    overflow: hidden;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    background-color: white;
+    img {
+        object-fit: contain;
+        width: 100px;
+        height: 100px;
+      }
+}
+
+.logo-rounded {
+    overflow: hidden;
+    border-radius: 10px;
+    width: 130px;
+    height: 130px;
+    background-color: white;
+    img {
+        object-fit: cover;
+        width: 130px;
+        height: 130px;
+      }
+  }
