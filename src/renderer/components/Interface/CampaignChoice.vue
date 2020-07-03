@@ -1,62 +1,42 @@
 <template>
   <div class="component">
-      <div class="view second position-relative d-flex">
-        <!-- RIBBON -->
-        <div class="ribbon left">
-          <span class="h5 mr-4 mb-3">2 - Choisis ton asso</span>
+    <div class="view campaign-choice">
+
+        <div class="s-title">
+          <div class="title">CHOISI TON ASSOCIATION</div>
+          <div class="subtitle"></div>
         </div>
 
-        <!-- ///// CAROUSEL ///// -->
-        <div class="carousel">
-          <vueper-slides ref="carousel" :infinite="false" :visibleSlides="1" :fixedHeight="true" :gap=30 transition-speed="250"
-            @ready="chooseCampaign($event.currentSlide.index)" 
-            @slide="chooseCampaign($event.currentSlide.index)">
+        <div class="s-content">
 
-            <template v-slot:arrow-left>
-              <div class="left-arrow"></div>
-            </template>
-            <template v-slot:arrow-right>
-              <div class="right-arrow"></div>
-            </template>
+          <div class="carousel">
+            <vueper-slides ref="carousel" class="no-shadow"
+                          :infinite="false" :visibleSlides="1" 
+                          :fixedHeight="true"  :bulletsOutside="true" 
+                          :touchable="false" :gap=30 transition-speed="250"
+                          @ready="chooseCampaign($event.currentSlide.index)" 
+                          @slide="chooseCampaign($event.currentSlide.index)">
 
-            <vueper-slide v-for="(campaign, i) in campaigns" :key="i">
-              <template v-slot:content>
-                <div class="div-content">
-                  <div class="row title">
-                      <span class="campaign-name"> {{ campaign.name }} </span>
-                  </div>
-                  <div class="row picture">
-                      <img :src=campaign.logo :alt=campaign.name class="campaign-picture">
-                  </div>
-                  <div class="row infos">
-                  </div>
-                  <div class="row descr">
-                    <span class="campaign-description">
-                        {{ campaign.description }}
-                      </span>
-                  </div>
-                </div>
+              <template v-slot:arrow-left>
+                <div class="left-arrow"></div>
               </template>
-            </vueper-slide>
-          </vueper-slides>
-        </div>
+              <template v-slot:arrow-right>
+                <div class="right-arrow"></div>
+              </template>
 
-        <!-- <div class="carousel double-carousel">
-            <vueper-slides class="carousel-top" ref="vueperslides1" :infinite="false" :visibleSlides="1" :fixedHeight="true" :gap=30 :bullets="false"
-                           @slide="$refs.vueperslides2 && $refs.vueperslides2.goToSlide($event.currentSlide.index, { emit: false })">
               <vueper-slide v-for="(campaign, i) in campaigns" :key="i">
                 <template v-slot:content>
                   <div class="div-content">
                     <div class="row title">
-                        <span class="campaign-name"> {{ campaign.name }} </span>
+                        <span class="slide-name"> {{ campaign.name }} </span>
                     </div>
                     <div class="row picture">
-                        <img :src=campaign.logo :alt=campaign.name class="campaign-picture">
+                        <img :src=campaign.logo :alt=campaign.name class="slide-picture">
                     </div>
                     <div class="row infos">
                     </div>
                     <div class="row descr">
-                      <span class="campaign-description">
+                      <span class="slide-description">
                           {{ campaign.description }}
                         </span>
                     </div>
@@ -64,23 +44,14 @@
                 </template>
               </vueper-slide>
             </vueper-slides>
+          </div>
 
-            <vueper-slides class="carousel-bottom" ref="vueperslides2" :touchable="false" :infinite="false" :visibleSlides="2" :fixedHeight="true" :gap=30
-                            @slide="$refs.vueperslides1 && $refs.vueperslides1.goToSlide($event.currentSlide.index, { emit: false })">
-              <vueper-slide v-for="(campaign, i) in campaigns" :key="i" @click.native="$refs.vueperslides2 && $refs.vueperslides2.goToSlide(i)">
-                  <template v-slot:content>
-                    <div class="div-content">
-                      hello
-                    </div>
-                  </template>
-                </vueper-slide>
-            </vueper-slides>
-        </div> -->
-        <!-- ///// CAROUSEL ///// -->
+        </div>
 
-      </div>
-    <!-- GAMEPAD -->
-    <helpGamepad @simulate_a="simulate_a" @simulate_b="simulate_b" @simulate_right="simulate_right" @simulate_left="simulate_left" />
+        <!-- GAMEPAD -->
+        <helpGamepad @simulate_a="simulate_a" @simulate_b="simulate_b" @simulate_right="simulate_right" @simulate_left="simulate_left" />
+
+    </div>
   </div>
 </template>
 
@@ -221,28 +192,6 @@ export default {
 </script>
 
 <style scoped>
-
-.campaign-name {
-  margin-left: 50%;
-  transform: translateX(-50%);
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: white;
-}
-
-.campaign-picture {
-  height: 100%;
-  margin-left: 50%;
-  transform: translateX(-50%);
-}
-
-.campaign-description  {
-  margin-left: 18px;
-  margin-right: 18px;
-  color : white;
-  font-size: 1rem;
-  text-align: justify;
-}
 
 .video-border {
     border: 2px solid #FFFF00;

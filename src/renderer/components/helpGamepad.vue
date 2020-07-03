@@ -6,11 +6,13 @@
                     <span class="left-gpio"  @click="simulate_left"></span>
                     <span class="dot"></span>
                     <span class="right-gpio"  @click="simulate_right"></span>
+                    <span class="gpio-help"> Se déplacer </span>
                 </div>
                  <div class="gpio2" id="gpio2" style="display: none;">
                     <span class="up-gpio" @click="simulate_up"></span>
                     <span class="dot"></span>
                     <span class="down-gpio"  @click="simulate_down"></span>
+                    <span class="gpio-help"> Se déplacer </span>
                 </div>
                  <div class="gpio3" id="gpio3" style="display: none;">
                     <span class="left-gpio"  @click="simulate_left"></span>
@@ -18,11 +20,12 @@
                     <span class="dot"></span>
                     <span class="down-gpio"  @click="simulate_down"></span>
                     <span class="right-gpio"  @click="simulate_right"></span>
+                    <span class="gpio-help"> Se déplacer </span>
                 </div>
                  <div class="no-gpio" id="no-gpio" style="display: none;">
                     <span class="dot"></span>
+                    <span class="gpio-help"> Se déplacer </span>
                 </div>
-                <span class="gpio-help"> Se déplacer </span>
             </div>
             <div class="right-side">
                 <span class="B-but" id="B-but" @click="simulate_b"><span class="g-btn">B</span>Retour</span>
@@ -74,7 +77,7 @@ export default {
                     break;
                 case 3 : gpio3.style.display = "block";
                     break; 
-                case 4 : no_gpio.style.display = "block";
+                case 4 : no_gpio.style.display = "none";
                     break;
                 default : this.$emit("error", {
                             visible: true,
@@ -174,10 +177,12 @@ export default {
 }
 
 .A-but {
+    color: white;
     cursor: pointer;
 }
 
 .B-but {
+    color: white;
     cursor: pointer;
 }
 

@@ -1,18 +1,21 @@
 <template>
     <div class="component">
+        <div class="view ticket-proposition">
 
-        <div class="content">
-            <div class="end-title">
-                <span class="h2">Demande de reçu fiscal</span><br>
-                <span class="h2">Souhaites tu faire une demande de reçu fiscal ?  </span>
-            </div>
-            <div class="end-choice">
-                <div class="list-button"  v-for="(choice, i) in choices" :key="i" :for="i" @click.prevent="doChoice(i)">
-                  <div :class="[selectedChoice == i ? 'selected' : '' ,'e-button']"> {{choice.name}} </div>
+            <div class="content">
+                <div class="end-title">
+                    <span class="h2">Demande de reçu fiscal</span><br>
+                    <span class="h2">Souhaites tu faire une demande de reçu fiscal ?  </span>
+                </div>
+                <div class="end-choice">
+                    <div class="list-button"  v-for="(choice, i) in choices" :key="i" :for="i" @click.prevent="doChoice(i)">
+                    <div :class="[selectedChoice == i ? 'selected' : '' ,'e-button']"> {{choice.name}} </div>
+                    </div>
                 </div>
             </div>
+            <helpGamepad :gpio_help="2"  @simulate_a="simulate_a" @simulate_up="simulate_up" @simulate_down="simulate_down" :B_but="false"/>
+            
         </div>
-        <helpGamepad :gpio_help="2"  @simulate_a="simulate_a" @simulate_up="simulate_up" @simulate_down="simulate_down" :B_but="false"/>
     </div>
 </template>
 

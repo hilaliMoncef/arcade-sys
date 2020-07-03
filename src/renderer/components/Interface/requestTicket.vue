@@ -1,41 +1,45 @@
 <template>
     <div class="component">
-        <div class="header-end">
-            <span class="title-end">Demande de reçu fiscal</span> <br>
-            <span class="subtitle-end">Pour faire une demande de reçu fiscal, saise ton adresse mail à l'aide du clavier virtuel</span>
-        </div>
-        <div class="content"> 
-            <div class="prompt-email"> {{ email }} </div>
-            <div class="virtual-keyboard">
-                <div class="row row-keyboard">
-                    <div v-for="(touch, i) in keys[0]" :key="i" :for="i" @click.prevent="selectTouch(i, 0)">
-                        <div :class="[selectedTouch == touch ? (touch == null ? '': 'selected') : '', 'col touch', touch]"> {{touch}} </div>
-                    </div>
-                </div>
-                <div class="row row-keyboard" style="top:25px;">
-                    <div v-for="(touch, i) in keys[1]" :key="i" :for="i" @click.prevent="selectTouch(i, 1)">
-                        <div :class="[selectedTouch == touch ? (touch == null ? '': 'selected') : '', 'col touch', touch]"> {{touch}} </div>
-                    </div>
-                </div>
-                <div class="row row-keyboard" style="top:50px;">
-                    <div v-for="(touch, i) in keys[2]" :key="i" :for="i" @click.prevent="selectTouch(i, 2)">
-                        <div :class="[selectedTouch == touch ? (touch == null ? '': 'selected') : '', 'col touch', touch]"> {{touch}} </div>
-                    </div>
-                </div>
-                <div class="row row-keyboard" style="top:75px;">
-                    <div v-for="(touch, i) in keys[3]" :key="i" :for="i" @click.prevent="selectTouch(i, 3)">
-                        <div :class="[selectedTouch == touch ? (touch == null ? '': 'selected') : '', 'col touch', touch]"> {{touch}} </div>
-                    </div>
-                </div>
+        <div class="view request-ticket">
+            <div class="header-end">
+                <span class="title-end">Demande de reçu fiscal</span> <br>
+                <span class="subtitle-end">Pour faire une demande de reçu fiscal, saise ton adresse mail à l'aide du clavier virtuel</span>
             </div>
-            <div :class="[selectedTouch == 'valider' ? 'selected' : '' ,'submit-button']" @click="validate()">Valider</div>
+
+            <div class="content"> 
+                <div class="prompt-email"> {{ email }} </div>
+                <div class="virtual-keyboard">
+                    <div class="row row-keyboard">
+                        <div v-for="(touch, i) in keys[0]" :key="i" :for="i" @click.prevent="selectTouch(i, 0)">
+                            <div :class="[selectedTouch == touch ? (touch == null ? '': 'selected') : '', 'col touch', touch]"> {{touch}} </div>
+                        </div>
+                    </div>
+                    <div class="row row-keyboard" style="top:25px;">
+                        <div v-for="(touch, i) in keys[1]" :key="i" :for="i" @click.prevent="selectTouch(i, 1)">
+                            <div :class="[selectedTouch == touch ? (touch == null ? '': 'selected') : '', 'col touch', touch]"> {{touch}} </div>
+                        </div>
+                    </div>
+                    <div class="row row-keyboard" style="top:50px;">
+                        <div v-for="(touch, i) in keys[2]" :key="i" :for="i" @click.prevent="selectTouch(i, 2)">
+                            <div :class="[selectedTouch == touch ? (touch == null ? '': 'selected') : '', 'col touch', touch]"> {{touch}} </div>
+                        </div>
+                    </div>
+                    <div class="row row-keyboard" style="top:75px;">
+                        <div v-for="(touch, i) in keys[3]" :key="i" :for="i" @click.prevent="selectTouch(i, 3)">
+                            <div :class="[selectedTouch == touch ? (touch == null ? '': 'selected') : '', 'col touch', touch]"> {{touch}} </div>
+                        </div>
+                    </div>
+                </div>
+                <div :class="[selectedTouch == 'valider' ? 'selected' : '' ,'submit-button']" @click="validate()">Valider</div>
+            </div>
+            
+            <helpGamepad :gpio_help="3" @simulate_a="simulate_a" @simulate_b="simulate_b" 
+                        @simulate_right="navigOnKeyboard(1)" 
+                        @simulate_left="navigOnKeyboard(2)" 
+                        @simulate_up="navigOnKeyboard(3)" 
+                        @simulate_down="navigOnKeyboard(4)" 
+            ></helpGamepad>
         </div>
-        <helpGamepad :gpio_help="3" @simulate_a="simulate_a" @simulate_b="simulate_b" 
-                     @simulate_right="navigOnKeyboard(1)" 
-                     @simulate_left="navigOnKeyboard(2)" 
-                     @simulate_up="navigOnKeyboard(3)" 
-                     @simulate_down="navigOnKeyboard(4)" 
-        ></helpGamepad>
     </div>
 </template>
 
@@ -275,7 +279,7 @@ export default {
 
 .header-end {
     text-align: center;
-    color: rgb(54, 54, 54);
+    color: white;
     margin-top: 15vh;
     margin-bottom: 10vh;
 }
@@ -298,6 +302,7 @@ export default {
 }
 
 .touch {
+    color : white;
     font-size: 2rem;
     width: 45px;
     height: 55px;

@@ -10,6 +10,18 @@
   font-weight: normal;
   font-style: normal;
 }
+@font-face {
+  font-family: "Pixel";
+  src: url("../webfonts/pixel.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Pixel2";
+  src: url("../webfonts/pixel2.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
 body {
   font-family: "Futura Std";
   font-weight: normal;
@@ -27,6 +39,8 @@ body {
 
 .view {
   flex: 1;
+  position: absolute;
+  width: 100%;
   height: 100%;
 }
 
@@ -71,29 +85,36 @@ body {
 }
 
 .vueperslides__track-inner {
-  margin-left: 28%;
-  margin-right: 28%;
+  margin-left: 32%;
+  margin-right: 32%;
+  height: 98%;
+  margin-top: 1%;
 }
 
 .vueperslide {
-  border-top: solid 3px red;
-  border-bottom: solid 3px red;
-  border-left: solid 3px red;
-  border-right: solid 3px red;
-  height: 75vh;
-  padding: 40px;
+  box-shadow: -5px 0px #775CE4, 0px -5px #775CE4, 5px 0px #372491, 0px 5px #372491;
+  padding-top: 20px;
+  padding-bottom: 35px;
+  padding-right: 35px;
+  padding-left: 35px;
   transition: all 0.3s ease;
 }
 .vueperslide:not(.vueperslide--active) {
   opacity: 0.5;
   transform: scale(0.8);
 }
+.vueperslide:not(.vueperslide--active) .picture, .vueperslide:not(.vueperslide--active) .title {
+  -webkit-filter: grayscale(100%);
+}
+
+.vueperslide--active {
+  background-color: #512FB5;
+}
 
 .carousel {
-  height: 85vh;
+  height: 76vh;
   width: 100vw;
-  margin-top: 7.5vh;
-  margin-bottom: 7.5vh;
+  margin-top: 15vh;
 }
 
 .left-arrow, .right-arrow {
@@ -105,139 +126,85 @@ body {
 }
 
 .right-arrow {
-  left: -30vh;
+  left: -45vh;
   background-image: url("../img/right-arrow.svg");
 }
 
 .left-arrow {
-  left: 30vh;
+  left: 45vh;
   background-image: url("../img/left-arrow.svg");
 }
 
 .div-content {
-  border: solid 6px green;
   height: 100%;
 }
 .div-content .title {
-  height: 10%;
+  height: 13%;
 }
 .div-content .picture {
   height: 40%;
 }
 .div-content .infos {
-  height: 15%;
+  height: 14%;
 }
 .div-content .descr {
-  height: 35%;
+  height: 33%;
+}
+
+.slide-name {
+  margin-left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 600;
+  color: yellow;
+}
+
+.slide-picture {
+  height: 100%;
+  margin-left: 50%;
+  transform: translateX(-50%);
+}
+
+.slide-description {
+  font-family: Pixel2;
+  margin-left: 18px;
+  margin-right: 18px;
+  color: white;
+  font-size: 1.4rem;
+  text-align: justify;
 }
 
 /* \CAROUSEL */
 /* GAMEPAD*/
-.small-gamepad .g-btn, .small-btn-gamepad .g-btn, .big-gamepad .g-btn {
-  color: white;
-  border-width: 2px;
-  font-weight: bold;
-}
-
 .g-btn {
+  color: white;
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  border: 2px solid white;
   border-radius: 50%;
   width: 30px;
   height: 30px;
   font-weight: bold;
   margin-left: 5px;
   margin-right: 5px;
+  background-color: #9183BE;
+  background-clip: padding-box;
 }
 
-.g-btn.clicked {
-  border-color: #fac812;
-  background-color: #fac812;
-  color: #000;
-}
-
-.small-gamepad, .small-btn-gamepad, .big-gamepad {
-  position: absolute;
-  bottom: 0;
-  font-weight: bold;
-  text-transform: uppercase;
-  font-size: 14px;
-}
-.big-gamepad {
-  left: 0;
-}
-.small-btn-gamepad {
-  /* Validate button at right */
-  right: 0;
-  background-color: #fac812;
-}
 /* \GAMEPAD */
-/* RIBBON */
-.ribbon {
-  position: absolute;
-  background-size: contain;
-  background-repeat: no-repeat;
-  color: white;
-  display: flex;
-  align-items: center;
-  text-transform: uppercase;
-  z-index: 5;
-}
-
-.ribbon.left {
-  top: 10px;
-  left: -10px;
-  width: 350px;
-  height: 90px;
-  justify-content: center;
-  align-self: center;
-  background-image: url("../img/left-ribbon.svg");
-}
-
-/* \RIBBON */
 /* BG */
-.bg-gradient, .bg-gradient-diag {
-  background: #35a8e0;
-  background: linear-gradient(90deg, #2a295f 0%, #3d61ab 100%);
-}
-
-.bg-gradient-diag {
-  background: linear-gradient(130deg, #2a295f 0%, #3d61ab 100%);
+.bg-gradient {
+  background: #221848;
+  background: linear-gradient(90deg, #3d2e7c 0%, #221848 100%);
 }
 
 /* \BG */
-/* CHECKBOX */
-.checkbox {
-  display: flex;
-  width: 100%;
-  flex-direction: column;
-  align-items: center;
-  border: 4px solid white;
-  color: black;
-  border-radius: 25px;
-  font-weight: bold;
-  transition: 0.2s ease all;
-}
-.checkbox input {
-  display: none;
-}
-
-.checkbox.selected {
-  border-color: #fac812;
-}
-
-/* \CHECKBOX */
 .amount {
   box-sizing: content-box;
   background-color: #3fa9f5;
   border-radius: 20px;
   min-height: 300px;
-}
-
-.amount.selected {
-  border: 3px solid #fac812 !important;
 }
 
 .logo-circle {
@@ -265,5 +232,27 @@ body {
   width: 130px;
   height: 130px;
 }
+
+/* TITLES */
+.s-title {
+  position: absolute;
+  text-align: center;
+  width: 100%;
+  top: 4vh;
+}
+
+.title {
+  font-family: Pixel;
+  font-size: 2.5vh;
+  color: white;
+}
+
+.subtitle {
+  font-family: Pixel2;
+  font-size: 1.5vh;
+  color: #C97005;
+}
+
+/* \TITLES */
 
 /*# sourceMappingURL=theme.css.map */

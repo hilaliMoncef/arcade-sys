@@ -1,50 +1,57 @@
 <template>
   <div class="component">
-      <div class="view position-relative first d-flex">
-        <!-- RIBBON -->
-        <div class="ribbon left">
-          <span class="h5 mr-4 mb-3">1 - Choisis ton jeu</span>
+    <div class="view game-choice">
+
+        <div class="s-title">
+          <div class="title">CHOISI TON JEU</div>
+          <div class="subtitle">1 partie = 5 minutes</div>
         </div>
 
-        <!-- ///// CAROUSEL ///// -->
-        <div class="carousel">
-          <vueper-slides ref="carousel" :infinite="false" :visibleSlides="1" :fixedHeight="true" :disableArrowsOnEdges="false" :bulletsOutside="true" :touchable="false" :gap=30 transition-speed="300"
-            @ready="chooseGame($event.currentSlide.index)" 
-            @slide="chooseGame($event.currentSlide.index)">
-            
-            <template v-slot:arrow-left>
-              <div class="left-arrow"></div>
-            </template>
-            <template v-slot:arrow-right>
-              <div class="right-arrow"></div>
-            </template>
+        <div class="s-content">
 
-            <vueper-slide v-for="(game, i) in games" :key="i">
-              <template v-slot:content>
-                <div class="div-content">
-                  <div class="row title">
-                      <span class="game-name"> {{ game.name }} </span>
-                  </div>
-                  <div class="row picture">
-                      <img :src=game.logo :alt=game.name class="game-picture">
-                  </div>
-                  <div class="row infos">
-                  </div>
-                  <div class="row descr">
-                    <span class="game-description">
-                        {{ game.description }}
-                      </span>
-                  </div>
-                </div>
+          <div class="carousel">
+            <vueper-slides ref="carousel" class="no-shadow"
+                          :infinite="false" :visibleSlides="1" 
+                          :fixedHeight="true" :bulletsOutside="true" 
+                          :touchable="false" :gap=30 :transition-speed="300"
+                          @ready="chooseGame($event.currentSlide.index)" 
+                          @slide="chooseGame($event.currentSlide.index)">
+              
+              <template v-slot:arrow-left>
+                <div class="left-arrow"></div>
               </template>
-            </vueper-slide>
-          </vueper-slides>
-        </div>       
-        <!-- ///// CAROUSEL ///// -->
+              <template v-slot:arrow-right>
+                <div class="right-arrow"></div>
+              </template>
 
-      </div>
-    <!-- GAMEPAD -->
-    <helpGamepad :gpio_help="1" @simulate_a="simulate_a" @simulate_b="simulate_b" @simulate_left="simulate_left" @simulate_right="simulate_right"/>
+              <vueper-slide v-for="(game, i) in games" :key="i">
+                <template v-slot:content>
+                  <div class="div-content">
+                    <div class="row title">
+                        <span class="slide-name"> {{ game.name }} </span>
+                    </div>
+                    <div class="row picture">
+                        <img :src=game.logo :alt=game.name class="slide-picture">
+                    </div>
+                    <div class="row infos">
+                    </div>
+                    <div class="row descr">
+                      <span class="slide-description">
+                          {{ game.description }}
+                        </span>
+                    </div>
+                  </div>
+                </template>
+              </vueper-slide>
+            </vueper-slides>
+          </div>     
+
+        </div>
+
+        <!-- GAMEPAD -->
+        <helpGamepad :gpio_help="1" @simulate_a="simulate_a" @simulate_b="simulate_b" @simulate_left="simulate_left" @simulate_right="simulate_right"/>
+
+    </div>
   </div>
 </template>
 
@@ -150,26 +157,6 @@ export default {
 
 <style scoped>
 
-.game-name {
-  margin-left: 50%;
-  transform: translateX(-50%);
-  font-size: 3rem;
-  font-weight: 600;
-  color: white;
-}
 
-.game-picture {
-  height: 100%;
-  margin-left: 50%;
-  transform: translateX(-50%);
-}
-
-.game-description  {
-  margin-left: 18px;
-  margin-right: 18px;
-  color : white;
-  font-size: 1.4rem;
-  text-align: justify;
-}
 
 </style>

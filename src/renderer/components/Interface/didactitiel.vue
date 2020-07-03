@@ -1,10 +1,11 @@
 <template>
     <div class="component">
-        <div class="d-flex flex-column h-100 bg-gradient">
+        <div class="view tutorial">
+
+
+
+            <helpGamepad :gpio_help="4" :B_but="false" @simulate_a="simulate_a"/>
         </div>
-
-
-        <helpGamepad :gpio_help="4" :B_but="false" @simulate_a="simulate_a"/>
     </div>    
 </template>
 

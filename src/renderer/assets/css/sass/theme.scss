@@ -14,6 +14,20 @@
     font-style: normal;
 }
 
+@font-face {
+    font-family: "Pixel";
+    src: url("../webfonts/pixel.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Pixel2";
+    src: url("../webfonts/pixel2.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+}
+
 body {
     font-family: "Futura Std";
     font-weight: normal;
@@ -31,6 +45,8 @@ body {
 
 .view {
     flex: 1;
+    position: absolute;
+    width: 100%;
     height: 100%;
 }
 
@@ -79,10 +95,9 @@ body {
 @import "vueperslide_perso.scss";
 
 .carousel {
-  height: 85vh;
+  height: 76vh;
   width: 100vw;
-  margin-top: 7.5vh;
-  margin-bottom: 7.5vh;
+  margin-top: 15vh;
 }
 
 %arrow {
@@ -95,35 +110,55 @@ body {
 
 .right-arrow {
     @extend %arrow;
-    left: -30vh;
+    left: -45vh;
     background-image: url("../img/right-arrow.svg");
 }
 
 .left-arrow {
     @extend %arrow;
-    left: 30vh;
+    left: 45vh;
     background-image: url("../img/left-arrow.svg");
 }
 
 .div-content {
-    border : solid 6px green;
     height: 100%;
-
     .title {
-        height: 10%;
+        height: 13%;
     }
-    
     .picture {
         height: 40%;
     }
-    
     .infos {
-        height: 15%;
+        height: 14%;
     }
-    
     .descr {
-        height: 35%;
+        height: 33%;
     }
+}
+
+
+.slide-name {
+    margin-left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 600;
+    color : yellow;
+}
+
+.slide-picture {
+    height: 100%;
+    margin-left: 50%;
+    transform: translateX(-50%);
+}
+
+.slide-description  {
+    font-family: Pixel2;
+    margin-left: 18px;
+    margin-right: 18px;
+    color : white;
+    font-size: 1.4rem;
+    text-align: justify;
 }
 
 /* \CAROUSEL */
@@ -137,133 +172,40 @@ body {
 }
 
 .g-btn {
+    color: white;
     display: inline-flex;
     justify-content: center;
     align-items: center;
-    border: 2px solid white;
     border-radius: 50%;
     width: 30px;
     height: 30px;
     font-weight: bold;
     margin-left: 5px;
     margin-right: 5px;
-}
-
-.g-btn.clicked {
-    border-color: #fac812;
-    background-color: #fac812;
-    color: #000;
-}
-
-.small-gamepad {
-    position: absolute;
-    bottom: 0;
-    font-weight: bold;
-    text-transform: uppercase;
-    font-size: 14px;
-    .g-btn {
-		@extend %g-btn;
-	}
-}
-  
-.big-gamepad {
-    @extend .small-gamepad;
-    left: 0;
-    .g-btn {
-		@extend %g-btn;
-	}
-}
-
-.small-btn-gamepad { /* Validate button at right */
-    @extend .small-gamepad;
-    right: 0;
-    background-color: #fac812;
-    .g-btn {
-		@extend %g-btn;
-	}
+    background-color: #9183BE;
+    background-clip: padding-box;
 }
 
 /* \GAMEPAD */
 
-/* RIBBON */
-
-.ribbon {
-    position: absolute;
-    background-size: contain;
-    background-repeat: no-repeat;
-    color: white;
-    display: flex;
-    align-items: center;
-    text-transform: uppercase;
-    z-index: 5;
-}
-
-.ribbon.left {
-    top: 10px;
-    left: -10px;
-    width: 350px;
-    height: 90px;
-    justify-content: center;
-    align-self: center;
-    background-image: url("../img/left-ribbon.svg");
-}
-
-/* \RIBBON */
-
 /* BG */
 
 .bg-gradient {
-    background: rgb(53, 168, 224);
+    background: rgb(34, 24, 72);
     background: linear-gradient(
       90deg,
-      rgba(42, 41, 95, 1) 0%,
-      rgba(61, 97, 171, 1) 100%
-    );
-  }
-  
-  .bg-gradient-diag {
-    @extend .bg-gradient;
-    background: linear-gradient(
-        130deg,
-        rgba(42, 41, 95, 1) 0%,
-        rgba(61, 97, 171, 1) 100%
+      rgb(61, 46, 124) 0%,
+      rgba(34, 24, 72, 1) 100%
     );
   }
 
 /* \BG */ 
-
-/* CHECKBOX */
-
-.checkbox {
-	display: flex;
-	width: 100%;
-	flex-direction: column;
-	align-items: center;
-	border: 4px solid white;
-	color: black;
-	border-radius: 25px;
-	font-weight: bold;
-	transition: 0.2s ease all;
-	input {
-		display: none;
-	}
-}
-
-.checkbox.selected {
-	border-color: #fac812;
-}
-
-/* \CHECKBOX */
 
 .amount {
     box-sizing: content-box;
     background-color: #3fa9f5;
     border-radius: 20px;
     min-height: 300px;
-  }
-  
-.amount.selected {
-    border: 3px solid #fac812 !important;
 }
 
 .logo-circle {
@@ -291,3 +233,27 @@ body {
         height: 130px;
       }
   }
+
+/* TITLES */
+
+.s-title {
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    top: 4vh;
+  }
+  
+  .title {
+    font-family: Pixel;
+    font-size: 2.5vh;
+    color : white;
+  }
+  
+  .subtitle {
+    font-family: Pixel2;
+    font-size: 1.5vh;
+    color : #C97005;
+  }
+  
+
+/* \TITLES */

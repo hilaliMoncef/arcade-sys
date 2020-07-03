@@ -1,10 +1,6 @@
 <template>
   <div class="component">
-      <div class="position-absolute w-100 h-100 d-flex flex-column"></div>
-        
-        <div class="ribbon left" style="width: 380px; height: 110px;">
-          <span class="h5 mr-3 mb-4">3 - Prêt à être solidaire?</span>
-        </div>
+      <div class="view amount-choice">
 
         <!-- /////// -->
         <div class="content">
@@ -16,7 +12,7 @@
           <div class="slider">
             <!-- <div class="container mb-5 pb-3 mt-2 text-center" id="content-slidebar"> -->
             <div class="content-slidebar">
-              <div class="progress mb-5" style="height: 30px;">
+              <div class="progress" style="height: 30px;">
                 <div
                   class="progress-bar bg-warning"
                   role="progressbar"
@@ -63,6 +59,7 @@
         <!-- /////// -->
         <!-- GAMEPAD -->
         <helpGamepad @simulate_a="simulate_a" @simulate_b="simulate_b" @simulate_left="simulate_left" @simulate_right="simulate_right"/>
+      </div>
   </div>
 </template>
 
@@ -262,6 +259,17 @@ export default {
 .content-line {
     height: 25vh;
     top: 19vw;
+}
+
+.content-slidebar {
+  box-shadow: -8px 0px #775CE4,
+              0px -8px #775CE4,
+              8px 0px #372491,
+              0px 8px #372491;
+}
+
+.progress {
+  border-radius: 0;
 }
 
 .line1{
